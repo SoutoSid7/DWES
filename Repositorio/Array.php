@@ -1,6 +1,6 @@
 <?php
 // Ejemplo 1
-    echo "Ejemplo 1<br>";
+    echo "<b>Ejemplo 1<br></b>";
     
     $personas = array(
                 $persona1 = array(
@@ -25,7 +25,7 @@
     }
 
 // Ejemplo 2
-    echo "<br><br>Ejemplo 2<br>";
+    echo "<b><br><br>Ejemplo 2<br></b>";
 
     $gente = array(
         array(
@@ -43,19 +43,21 @@
     );
 
     foreach($gente as $indice => $valor){
-        echo"Familia " .($indice + 1) .":<br>"; 
+        echo"Familia " .($indice + 1); 
+        echo "<ul>";
         foreach($valor as $clave => $dato){
             if(is_array($dato)){
-                echo "$clave" .": ";
+                echo "<li>$clave:<br></li>";
                 foreach ($dato as $hijo) { 
-                    echo "$hijo ";
+                    echo "<ul><li>$hijo<br></li></ul>";
                 }
                 echo "<br>";
             } else {
-                echo "$clave: $dato<br>";
+                echo "<li>$clave: $dato<br></li>";
             }
         }
         echo "<br>";
+        echo "</ul>";
     };
 
 ?>
