@@ -31,31 +31,4 @@
     {
         echo "$indice: $valor<br>";
     }
-
-// Ejemplo 4
-    echo "<br><br>Ejemplo 4<br>";
-    
-    $personas = array(
-                $persona1 = array(
-                    'Nombre' => "Yolanda",
-                    'Apellido1' => "Iglesias",
-                    'Apellido2' => "Suarez"
-                ),
-                $persona2 = array(
-                    'Nombre' => "Funko",
-                    'Apellido1' => "Bomba",
-                    'Apellido2' => "Amago"
-                )
-    );
-
-    
-    foreach($personas as $indice => $valor)
-    {
-        echo"Persona " .($indice + 1) .":<br>";
-        foreach($valor as $clave => $dato){
-            echo"$clave: $dato<br>";
-        }
-        echo "<br>";
-    }
-                
 ?>
