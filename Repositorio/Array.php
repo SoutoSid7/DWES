@@ -60,4 +60,21 @@
         echo "</ul>";
     };
 
+// Ejemplo 3
+    echo "<b><br><br>Ejemplo 3<br></b>";
+    $arrayNum = array(32, 85, 2, 76,56);
+    $arrayString = array("Hola", "Adios", "Pepe", "Juan", "Perro", "Gato");
+
+    sort($arrayString, SORT_STRING);
+    sort($arrayNum, SORT_NUMERIC);
+
+    echo "Array Numerico<br>";
+    foreach($arrayNum as $num){
+        echo $num ." ";
+    }
+
+    echo "<br>Array String<br>";
+    foreach($arrayString as $string){
+        echo $string ." ";
+    }
 ?>
