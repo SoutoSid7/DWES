@@ -31,4 +31,42 @@
     {
         echo "$indice: $valor<br>";
     }
+
+    for($i = 1; $i <= 5; $i++){
+        echo "Hello World <br>"; 
+        echo $i;
+    }
+
+// Arrays
+    $animales = array( // 1º Array que dentro tiene a: 
+                    array( // Array dentro del primer array (Amarillo)
+                        // Arrays dentro del array (Morado) que a su vez esta dentro del array amarillo
+                        array("Kevin", "Tobby"),
+
+                        array("Pepito", "Nomavi")
+                    ),
+
+                    array( // Array dentro del primer array (Amarillo)
+                        // Arrays dentro del array (Morado) que a su vez esta dentro del array amarillo
+                        array("Misfu", "Minguito"),
+                    
+                        array("Bigotes", "Sebastian")
+                    )
+    );
+    
+// Redondeo 
+    echo "<br> <br>";
+    $valor_redondear = 50.525;
+    
+    $var_up = round($valor_redondear, 2, PHP_ROUND_HALF_UP);
+    echo "<br>Redondea el valor alejandose de cero cuando esta a mitad de camino <br>";
+    echo "El numero redondeado es: $var_up <br>";
+
+    $var_down = round($valor_redondear, 2, PHP_ROUND_HALF_DOWN);
+    echo "<br>Redondea el valor acercandose a cero cuando esta a mitad de camino <br>";
+    echo "El numero redondeado es: $var_down <br>";
+
+    $var_even = round($valor_redondear, 2, PHP_ROUND_HALF_EVEN);
+    echo "<br> Redondea el valor par mas cercano cuando esta a mitad de camino <br>";
+    echo "El numero redondeado es: $var_even";
 ?>
