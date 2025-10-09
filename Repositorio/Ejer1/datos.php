@@ -15,7 +15,7 @@
         case '-':
             echo "La resta de " .$_POST["num1"] ." - " .$_POST["num2"] ." = " .($_POST["num1"] - $_POST["num2"]);
             break;
-        case 'x':
+        case '*':
             echo "La multiplicacion de " .$_POST["num1"] ." * " .$_POST["num2"] ." = " .($_POST["num1"] * $_POST["num2"]);
             break;
         case '/':
