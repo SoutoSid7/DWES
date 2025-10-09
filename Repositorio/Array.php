@@ -77,4 +77,27 @@
     foreach($arrayString as $string){
         echo $string ." ";
     }
+
+// Ejemplo 4
+    echo "<b><br><br>Ejemplo 4<br></b>";
+    
+    $cad = explode(' ', "Morenito tiene una buena correa");
+    print_r($cad);
+
+    echo "<br>";
+    $cad2 = "Morenito tiene una buena correa";
+    $letras = str_split($cad2);
+    print_r($letras); 
+
+    // Opcion 2
+    /*    foreach($letras as $op2){
+            echo $op2 ."<br>";
+        }
+    */
+
+// Ejemplo 5 
+    echo "<b><br><br>Ejemplo 5<br></b>";
+    $ej5 = array("hola", 7, "mi", 2, "hola", "mario");
+    print_r(array_count_values($ej5)); // array de valores a contar
+
 ?>
