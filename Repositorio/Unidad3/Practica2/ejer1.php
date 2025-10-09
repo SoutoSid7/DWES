@@ -24,5 +24,4 @@
     foreach($jugador as $i){
         echo $i ." ";
     }
-
 ?>
