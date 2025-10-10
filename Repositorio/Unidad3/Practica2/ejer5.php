@@ -3,7 +3,7 @@
     // Cargar la matriz
     for($i = 0; $i <3; $i++){
         for($j = 0; $j <5; $j++){
-            $matriz[$i][$j] = rand(100, 1000);
+            $matriz[$i][$j] = rand(1, 100);
         }
     }
 
@@ -20,7 +20,7 @@
         echo "<br>";
     }
 
-    // Mostrar el array por columnas
+    // Mostrar el array por filas
     echo "Matriz 3x5 (por filas)<br>";
     for($i = 0; $i < 3; $i++){
         for($j = 0; $j <$columnas; $j++){
