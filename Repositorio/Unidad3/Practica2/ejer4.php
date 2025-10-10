@@ -14,4 +14,15 @@
         }
         echo "<br>";
     }
+
+    echo "<br>Diagonal Principal: "; // Matriz principal Posicion = 1,1 2,2 3,3 4,4
+    for($i = 0; $i < 4; $i++){
+        echo $matriz[$i][$i] ."\n";
+    }
+
+    echo "<br>Diagonal Secundaria: "; // Matriz secundaria Posicion = 1,4 2,3 3,2 4,1
+    for($i = 0; $i < 4; $i++){
+        $diagonalSe = $matriz[$i][3 - $i];
+        echo $diagonalSe ."\n";
+    }
 ?>
