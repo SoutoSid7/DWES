@@ -2,8 +2,7 @@
     $academia = array(
         array(1, 6, 3),
         array(14, 19, 13),
-        array(
-            8, 7, 4),
+        array(8, 7, 4),
         array(3, 2, 1)
     );
 
