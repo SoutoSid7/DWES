@@ -1,5 +1,5 @@
 <?php
-// Formulario
+// Formulario 1
     if(isset($_POST['name']))
     else echo $_POST['name'];
     echo <<<_END
