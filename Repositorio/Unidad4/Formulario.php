@@ -1,8 +1,7 @@
 <?php
 // Formulario
-    if (isset($_POST['name'])) //$name = $_POST['name'];
-    echo $_POST['name'];
-    // else $name = "(Not entered)";
+    if(isset($_POST['name']))
+    else echo $_POST['name'];
     echo <<<_END
         <html>
             <head>
@@ -17,5 +16,5 @@
                 </form>
             </body>
             </html>
-_END;
+    _END;
 ?>
