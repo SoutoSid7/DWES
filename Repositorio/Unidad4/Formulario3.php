@@ -18,8 +18,8 @@
                     echo '<input type="number" id="num' . $i . '" name="num[]" placeholder="Ingresa el Número :" required><br>';
                                                                 //name="num[]" array de valores que se almacenan en $_POST['num']
                 }
+                echo '<input type="submit" value="Enviar">';
             }
         ?>
-        <input type="submit" value="Enviar">
     </form>
 </html>
