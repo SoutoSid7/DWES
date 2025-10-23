@@ -6,7 +6,9 @@
     <title>Formulario 4</title>
 </head>
 <body>
-<!--HTML-->
+    <?php // si no se enviaron los datos muestra el formulario
+        if($_SERVER["REQUEST_METHOD"] != "POST"){
+    ?>
     <form action = "Formulario4.php" method = "post">
         <!--Nombre-->
             <label for="nombre">Nombre:</label>
@@ -21,36 +23,39 @@
             <label for="profesion">Profesion:</label>
             <select name="profesion" id="profesion">
                 <option value="" selected disabled>--Seleccione una Opcion--</option>
-                <option value="informatico">Informatico</option>
-                <option value="medico">Medico</option>
-                <option value="policia">Policia</option>
-                <option value="bombero">Bombero</option>
-                <option value="mecanico">Mecanico</option>
+                <option value="Informatico">Informatico</option>
+                <option value="Medico">Medico</option>
+                <option value="Policia">Policia</option>
+                <option value="Bombero">Bombero</option>
+                <option value="Mecanico">Mecanico</option>
             </select><br>
         <!--Sexo-->
             <label for="sexo">Sexo:</label>
-            <input type ="radio" name="hombre" >Hombre
-            <input type="radio" name="mujer">Mujer<br>
+            <input type ="radio" name="sexo" value="Hombre">Hombre
+            <input type="radio" name="sexo" value="Mujer">Mujer<br>
     <!--Navegador Usado-->
             <label for="navegador">Navegador Usado:</label>
-            <input type="checkbox" name="chrome" value="1">Chrome
-            <input type="checkbox" name="safari" value="1">Safari
-            <input type="checkbox" name="opera" value="1">Opera<br>
+            <input type="checkbox" name="navegador[]" value="Chrome">Chrome
+            <input type="checkbox" name="navegador[]" value="Safari">Safari
+            <input type="checkbox" name="navegador[]" value="Opera">Opera<br>
     <!--Enviar-->
         <input type="submit" value="Enviar">
     </form>
 
 <!--PHP-->
-    <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
+    <?php // si se enviaron muestra las respuestas 
+        } else{
             echo "<h2>Datos Introducidos: </h2>";
             echo "Nombre: " .$_POST["nombre"] ."<br>";
             echo "Apellidos: " .$_POST["apellidos"] ."<br>";
             echo "Edad: " .$_POST["edad"] ."<br>";
             echo "Profesion: " .$_POST["profesion"] ."<br>";
             echo "Sexo: " .$_POST["sexo"] ."<br>";
-            echo "Navegador Usado: " .$_POST["navegador"] ."<br>";
-        }
+
+            if(isset($_POST["navegador"])){
+                echo "Navegador Usado: " . implode(", ", $_POST["navegador"]) . "<br>";
+            }  
+        }      
     ?>
 
 </body>
