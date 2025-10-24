@@ -32,5 +32,8 @@
             echo "<img src='$img' width='80' height='100'> ";
         }
     ?>
+    <form action = "Formulario4.php" method = "post">
+
+    </form>
 </body>
 </html>
