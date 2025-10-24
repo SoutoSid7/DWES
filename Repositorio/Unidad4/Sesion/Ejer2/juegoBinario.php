@@ -8,7 +8,7 @@
 <body>
     <h1>Adivina el Juego en Binario</h1>
     <?php
-
+        
     ?>
 </body>
 </html>
