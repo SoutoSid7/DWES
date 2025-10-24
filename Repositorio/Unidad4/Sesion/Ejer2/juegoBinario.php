@@ -8,7 +8,29 @@
 <body>
     <h1>Adivina el Juego en Binario</h1>
     <?php
-        
+        $binario = [];
+        for ($i = 0; $i <= 3; $i++) {
+            $num = rand(0, 1);
+            $binario[$i] = $num;
+        }
+        echo "El número binario generado es: " . implode("", $binario) ."<br>"; // .implode devuelve los 4 numeros del array como un string
+        foreach ($binario as $i => $bin){
+            switch($i){
+                case 0:
+                    $img = ($bin == 1) ? "Imagenes/Rombo8.jpg" : "Imagenes/Negri.JPG";
+                    break;
+                case 1:
+                    $img = ($bin == 1) ? "Imagenes/Rombo4.jpg" : "Imagenes/Negri.JPG";
+                    break;
+                case 2:
+                    $img = ($bin == 1) ? "Imagenes/Rombo2.jpg" : "Imagenes/Negri.JPG";
+                    break;
+                case 3:
+                    $img = ($bin == 1) ? "Imagenes/Rombo1.jpg" : "Imagenes/Negri.JPG";
+                    break;
+            }
+            echo "<img src='$img' width='80' height='100'> ";
+        }
     ?>
 </body>
 </html>
