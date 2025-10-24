@@ -13,7 +13,7 @@
             $num = rand(0, 1);
             $binario[$i] = $num;
         }
-        echo "El número binario generado es: " . implode("", $binario) ."<br>"; // .implode devuelve los 4 numeros del array como un string
+        echo "El número binario generado es: " . implode("", $binario) ."<br><br>"; // .implode devuelve los 4 numeros del array como un string
         foreach ($binario as $i => $bin){
             switch($i){
                 case 0:
