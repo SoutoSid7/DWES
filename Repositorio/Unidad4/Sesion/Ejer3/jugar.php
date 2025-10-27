@@ -15,7 +15,7 @@
 
     ?>
 
-    <form method="post">
+    <form action="jugar.php" method="post">
         
     </form>
 
