@@ -31,7 +31,7 @@
                     break;
                 case 3:
                     $img = ($bin == 1) ? "Imagenes/Rombo1.jpg" : "Imagenes/Negri.JPG";
-                    break;
+                    break; 
             }
             echo "<img src='$img' width='80' height='100'> ";
         }
