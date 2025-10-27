@@ -18,6 +18,7 @@
         $col4 = $colores[array_rand($colores)];
 
         $solucion = [$col1, $col2, $col3, $col4];
+        $_SESSION["solucion"] = $solucion;
 
         pintarCirculos($col1, $col2, $col3, $col4);
     ?>
