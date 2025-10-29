@@ -19,6 +19,7 @@
 
         $solucion = [$col1, $col2, $col3, $col4];
         $_SESSION["solucion"] = $solucion;
+        $_SESSION["intentos"] = []; // reinicia la secuencia del jugador
 
         pintarCirculos($col1, $col2, $col3, $col4);
     ?>
