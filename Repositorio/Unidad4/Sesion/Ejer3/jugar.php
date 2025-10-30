@@ -37,9 +37,8 @@
 
         if(isset($_POST["comprobar"])){
             if($intentos === $solucion){
-                echo "<p>Correcto. Has ganado</p>";
-                echo '<form action="inicio.php" method="post"><input type="submit" value="Volver a jugar">
-                    </form>';
+                header("Location: acierto.php");
+                exit;
                 session_destroy();
                 exit;
             } else {
