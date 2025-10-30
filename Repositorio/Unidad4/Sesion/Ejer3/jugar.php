@@ -12,9 +12,9 @@
         require_once 'pintarCirculos.php';
         
         // Iniciar variable de sesion si no existe
-        if(!isset($_SESSION["intentos"])){
-            $_SESSION["intentos"] = [];
-        }
+    //    if(!isset($_SESSION["intentos"])){
+      //      $_SESSION["intentos"] = [];
+        //}
 
         $colores = ["red", "blue", "yellow", "green"];
 
