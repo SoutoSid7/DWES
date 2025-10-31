@@ -30,18 +30,15 @@
 
         pintarCirculos($mostrar);
 
-        if(isset($_POST["comprobar"])){
+        if(count($intentos) >= count($solucion)){
             if($intentos === $solucion){
                 header("Location: acierto.php");
-                exit;
-                session_destroy();
                 exit;
             } else {
                 header("Location: fallo.php");
                 exit;
             }
-        }
-        
+        }      
     ?>
 
     <p>Pulsa los Botones en el Orden Correcto: </p>
@@ -51,8 +48,10 @@
         <button type="submit" name="yellow" style ="background-color:yellow; color:black; width:80px; height:35px; border-radius: 2px">AMARILLO</button>
         <button type="submit" name="green" style ="background-color:green; color:white; width:75px; height:35px; border-radius: 2px">VERDE</button>
     </form>
+    <!--
     <form action="jugar.php" method="post" >
         <br><input type="submit" name="comprobar" value="COMPROBAR">
     </form>
+    -->
 </body>
 </html>

@@ -16,7 +16,7 @@
         pintarCirculos($solucion);
     ?>
     <form 
-        action="inicio.php" method="post"><input type="submit" value="Volver a jugar">
+        action="dificultad.php" method="post"><input type="submit" value="Volver a jugar">
     </form>
 </body>
 </html>
