@@ -13,12 +13,16 @@
 
         $colores = ["red", "blue", "yellow", "green"];
 
-        $numCirculos = $_POST['num'] ?? 4;
+        /* 
+            Obtiene num circulos de dificultad.php
+            ?? 4 si $_POST['num'] no existe el num es 4
+        */
+        $numCirculos = $_POST['num'] ?? 4; 
 
         $solucion = [];
 
         for($i = 0; $i <$numCirculos; $i++){
-            $solucion[] = $colores[array_rand($colores)];
+            $solucion[] = $colores[array_rand($colores)]; // toma un color aleatorio del array $colores
         }
 
         $_SESSION["solucion"] = $solucion;
