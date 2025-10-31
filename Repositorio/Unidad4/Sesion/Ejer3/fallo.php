@@ -17,16 +17,16 @@
 
     <p>La secuencia correcta es:</p>
     <?php 
-        pintarCirculos($solucion);
+        pintarCirculos($solucion[0], $solucion[1], $solucion[2], $solucion[3]);
     ?>
 
     <p>Tu secuencia fue:</p>
     <?php 
-        pintarCirculos($intentos);
+        pintarCirculos($intentos[0], $intentos[1], $intentos[2], $intentos[3]);
     ?>
 
-    <form 
-    action="dificultad.php" method="post"><input type="submit" value="Volver a jugar">
+    <form action="inicio.php" method="post">
+        <input type="submit" value="Volver a jugar">
     </form>
     
 </body>

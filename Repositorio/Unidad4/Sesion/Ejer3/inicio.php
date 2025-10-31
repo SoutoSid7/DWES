@@ -11,25 +11,17 @@
         session_start();
         require_once 'pintarCirculos.php';
 
-        $colores = ["red", "blue", "yellow", "green", "purple", "brown", "pink", "orange"];
+        $colores = ["red", "blue", "yellow", "green"];
+        $col1 = $colores[array_rand($colores)]; // da a $col1 un color aleatorio del array $colores
+        $col2 = $colores[array_rand($colores)];
+        $col3 = $colores[array_rand($colores)];
+        $col4 = $colores[array_rand($colores)];
 
-        /* 
-            Obtiene num circulos de dificultad.php
-            ?? 4 si $_POST['num'] no existe el num es 4
-        */
-        $numCirculos = $_POST['num'] ?? 4; 
-        $numColores = $_POST['numColores'] ?? 4;
-
-        $solucion = [];
-
-        for($i = 0; $i <$numCirculos; $i++){
-            $solucion[] = $colores[array_rand($colores)]; // toma un color aleatorio del array $colores
-        }
-
+        $solucion = [$col1, $col2, $col3, $col4];
         $_SESSION["solucion"] = $solucion;
         $_SESSION["intentos"] = []; // reinicia la secuencia del jugador
 
-        pintarCirculos($solucion);
+        pintarCirculos($col1, $col2, $col3, $col4);
     ?>
 
     <!--Boton Vamos a Jugar-->
