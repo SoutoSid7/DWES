@@ -17,12 +17,12 @@
 
     <p>La secuencia correcta es:</p>
     <?php 
-        pintarCirculos($solucion[0], $solucion[1], $solucion[2], $solucion[3]);
+        pintarCirculos($solucion);
     ?>
 
     <p>Tu secuencia fue:</p>
     <?php 
-        pintarCirculos($intentos[0], $intentos[1], $intentos[2], $intentos[3]);
+        pintarCirculos($intentos);
     ?>
 
     <form 
