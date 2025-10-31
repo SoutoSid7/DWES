@@ -11,6 +11,7 @@
         <label for="num">Eligue el numero de circulos</label>
         <select name="num" id="num">
             <?php // Hacer option sin ir escribiendolo uno a uno 
+                session_start();
                 for($i = 4; $i <= 8; $i++){
                     echo "<option value='$i'>$i</option>";
                 }
