@@ -11,13 +11,14 @@
         session_start();
         require_once 'pintarCirculos.php';
 
-        $colores = ["red", "blue", "yellow", "green"];
+        $colores = ["red", "blue", "yellow", "green", "purple", "brown", "pink", "orange"];
 
         /* 
             Obtiene num circulos de dificultad.php
             ?? 4 si $_POST['num'] no existe el num es 4
         */
         $numCirculos = $_POST['num'] ?? 4; 
+        $numColores = $_POST['numColores'] ?? 4;
 
         $solucion = [];
 
