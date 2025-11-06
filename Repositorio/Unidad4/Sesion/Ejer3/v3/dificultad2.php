@@ -29,7 +29,7 @@
         <br><input type="range" id="numSlider" name="numSlider" min="4" max="8" value="6" oninput="num.value = this.value; numOut.value = this.value">
         <output id="numOut">6</output>
 
-        <!-- Control de Colores -->
+        <!-- Control de Colores -->  
         <label for="numColores"><br><br>Colores:</label><br>
         <button type="button"
             onclick="numColores.value = Math.max(4, parseInt(numColores.value) - 1); colSlider.value = numColores.value; colOut.value = numColores.value;">◀</button>
