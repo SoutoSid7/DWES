@@ -38,11 +38,11 @@
             $sql = "SELECT * FROM usuarios WHERE Nombre = '$nombre' AND Clave = '$clave'"; // Coincide con las variables de arriba
             $result  = $conn->query($sql); // Ejecuta la consulta en la BBDD y lo guarda en $result
 
-            if($result->num_rows > 0){
-                $user = $result->fetch_assoc();
-                if($clave == $user['Clave']){
-                    $_SESSION['loggedin'] = true;
-                    $_SESSION['id'] = $user['id'];
+            if($result->num_rows > 0){ // Comprueba si devolvio al menos una fila 
+                $user = $result->fetch_assoc(); // Convierte la primera fila en un array asociativo 
+                if($clave == $user['Clave']){ // Comprueba la contraseña introducida con la contraseña de la BBDD
+                    $_SESSION['loggedin'] = true; // Marca usuario esta auntetificado en la sesion
+                    $_SESSION['id'] = $user['id']; // Guarda el id del usuario en la sesion 
                     $_SESSION['Nombre'] = $user['Nombre'];
                     header("Location: inicio.php");
                     exit();
