@@ -15,8 +15,10 @@
         $solucion = $_SESSION["solucion"];
         pintarCirculos($solucion[0], $solucion[1], $solucion[2], $solucion[3]);
     ?>
-    <form 
-        action="inicio.php" method="post"><input type="submit" value="Volver a jugar">
+    <form action="inicio.php" method="post"><input type="submit" value="Volver a jugar">
+    </form>
+
+    <br><form action="estadistica.php" method="post"><input type="submit" value="Ver estadisticas">
     </form>
 </body>
 </html>

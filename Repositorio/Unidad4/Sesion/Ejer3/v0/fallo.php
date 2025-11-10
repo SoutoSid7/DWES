@@ -25,8 +25,10 @@
         pintarCirculos($intentos[0], $intentos[1], $intentos[2], $intentos[3]);
     ?>
 
-    <form action="inicio.php" method="post">
-        <input type="submit" value="Volver a jugar">
+    <form action="inicio.php" method="post"><input type="submit" value="Volver a jugar">
+    </form>
+
+    <form action="estadistica.php" method="post"><input type="submit" value="Ver estadisticas">
     </form>
     
 </body>
