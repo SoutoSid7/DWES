@@ -12,8 +12,16 @@
         session_start();
         require_once 'pintarCirculos.php';
 
+        // Datos de la Sesion
+        $hn = 'localhost';
+        $db = 'bdsimon';
+        $un = 'root';
+        $pw = '';   
+
         $solucion = $_SESSION["solucion"];
         pintarCirculos($solucion[0], $solucion[1], $solucion[2], $solucion[3]);
+
+        $sql="INSERT INTO jugadas (codigousu,acierto) VALUES ('$codusu',1)";
     ?>
     <form action="inicio.php" method="post"><input type="submit" value="Volver a jugar">
     </form>

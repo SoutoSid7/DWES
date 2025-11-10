@@ -11,8 +11,16 @@
         session_start();
         require_once 'pintarCirculos.php';
 
+        // Datos de la Sesion
+        $hn = 'localhost';
+        $db = 'bdsimon';
+        $un = 'root';
+        $pw = ''; 
+
         $solucion = $_SESSION["solucion"];
         $intentos = $_SESSION["intentos"] ?? [];
+
+        $sql="INSERT INTO jugadas (codigousu,acierto) VALUES ('$codusu',1)";
     ?>
 
     <p>La secuencia correcta es:</p>
