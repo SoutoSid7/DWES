@@ -19,7 +19,7 @@
         $pw = '';   
 
         // Conectar la BBDD
-        $conn = new mysqli($hn, $un. $pw, $db);
+        $conn = new mysqli($hn, $un, $pw, $db);
         if ($conn->connect_error){
             die("Fatal Error: " .$conn->connect_error);
         }
