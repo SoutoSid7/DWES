@@ -18,21 +18,10 @@
         $un = 'root';
         $pw = '';   
 
-        // Conectar la BBDD
-        $conn = new mysqli($hn, $un, $pw, $db);
-        if ($conn->connect_error){
-            die("Fatal Error: " .$conn->connect_error);
-        }
-        // Recuperar ID del usuario de la sesion
-        $codusu = $_SESSION['id'];
-        
-        $sql = "INSERT INTO jugadas (codigousu, acierto) VALUES ('$codusu',1)";
-        $conn->query($sql);
-        $conn->close();
-
         $solucion = $_SESSION["solucion"];
         pintarCirculos($solucion[0], $solucion[1], $solucion[2], $solucion[3]);
 
+        $sql="INSERT INTO jugadas (codigousu, acierto) VALUES ('$codusu',1)";
     ?>
     <form action="inicio.php" method="post"><input type="submit" value="Volver a jugar">
     </form>

@@ -17,21 +17,10 @@
         $un = 'root';
         $pw = ''; 
 
-        // Conectar a la BBDD
-        $conn = new mysqli($hn, $un, $pw, $db);
-        if ($conn->connect_error) {
-            die("Fatal Error: " . $conn->connect_error);
-        }
-
-        // Recuperar el ID del usuario de la sesión
-        $codusu = $_SESSION['id'];
-
-        $sql = "INSERT INTO jugadas (codigousu, acierto) VALUES ('$codusu', 0)"; // 0 para fallo
-        $conn->query($sql);
-        $conn->close();
-
         $solucion = $_SESSION["solucion"];
         $intentos = $_SESSION["intentos"] ?? [];
+
+        $sql="INSERT INTO jugadas (codigousu,acierto) VALUES ('$codusu',1)";
     ?>
 
     <p>La secuencia correcta es:</p>
