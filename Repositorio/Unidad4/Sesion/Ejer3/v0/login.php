@@ -17,6 +17,10 @@
         <br><br><button type="submit" name="login">Enviar</button>
     </form>
 
+    <form action="nuevoUsuario.php" method="post">
+        <button type="submit" name="login">Enviar</button>
+    </form>
+
 <!--PHP-->
     <?php
         session_start();
