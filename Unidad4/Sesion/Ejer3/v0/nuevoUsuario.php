@@ -33,9 +33,9 @@
 
         // Comprobar formulario fue enviado
         if(isset($_POST['login'])){
-            $nombre = $_POST['usuario'];
-            $clave = $_POST['passwd']; 
-            $clave2 = $_POST['passwd2'];   
+            $nombre = $_POST['usuario'] ?? '';
+            $clave = $_POST['passwd'] ?? ''; 
+            $clave2 = $_POST['passwd2'] ?? '';   
             
             if(empty($clave) ||empty($clave2)){
                 echo "<br>Por favor, completa ambos campos de contraseña";
