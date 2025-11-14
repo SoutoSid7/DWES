@@ -33,7 +33,7 @@
 
         // Comprobar formulario fue enviado
         if(isset($_POST['login'])){
-            $nombre = $_POST['usuario'] ?? '';
+            $nombre = $_POST['usuario'] ?? ''; // ?? '' Evita warnings
             $clave = $_POST['passwd'] ?? ''; 
             $clave2 = $_POST['passwd2'] ?? '';   
             
