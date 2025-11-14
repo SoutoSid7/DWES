@@ -52,7 +52,7 @@
             } else {
                 // Insertar nuevo usuario
                 $sql = $conn->prepare("INSERT INTO usuarios (Nombre, Clave) VALUES (?, ?)");
-                // 
+                // Vincula parametros de $nombre y $clave a Nombre y Clave de BBDD
                 $sql->bind_param("ss", $nombre, $clave);
                 if($sql->execute()){
                     echo "Usuario creado correctamente";
