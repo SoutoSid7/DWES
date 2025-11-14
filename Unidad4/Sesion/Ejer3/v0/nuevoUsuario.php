@@ -34,11 +34,16 @@
             $clave = $_POST['passwd'];    
             
             // Verificamos si el usuario esta creado
-            //
+
+            // Sentencia SQL donde nombre se introduce despues con ?
             $sql = $conn->prepare("SELECT COUNT(*) FROM usuarios WHERE Nombre = ?");
+            // Se vincula variable $nombre con ?, la "s" indica que es tipo string
             $sql->bind_param("s", $nombre);
+            // Ejecuta la consulra con el valor incluido
             $sql->execute();
+            // Vincula el resultado con la variable que devuelve el num de filas
             $sql->bind_result($count);
+            // Obtiene resultado y almacena en $count
             $sql->fetch();
             $sql->close();
 
@@ -47,6 +52,7 @@
             } else {
                 // Insertar nuevo usuario
                 $sql = $conn->prepare("INSERT INTO usuarios (Nombre, Clave) VALUES (?, ?)");
+                // 
                 $sql->bind_param("ss", $nombre, $clave);
                 if($sql->execute()){
                     echo "Usuario creado correctamente";
