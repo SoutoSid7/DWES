@@ -9,7 +9,7 @@
     <h1>Iniciar sesión</h1>
     <form action="login.php" method="post">
         <label for="usuario">Usuario:</label>
-        <input id="usuario" name="usuario" type="text" placeholder="Introduce tu usuario">
+        <input id="usuario" name="usuario" type="text" placeholder="Introduce tu usuario"><br>
 
         <br><label for="passwd">Contraseña:</label>
         <input id="passwd" name="passwd" type="password" placeholder="Introduce tu contraseña">
@@ -18,7 +18,7 @@
     </form>
 
     <form action="nuevoUsuario.php" method="post">
-        <button type="submit" name="login">Enviar</button>
+        <br><button type="submit" name="login">Crear Nuevo Usuario</button>
     </form>
 
 <!--PHP-->
