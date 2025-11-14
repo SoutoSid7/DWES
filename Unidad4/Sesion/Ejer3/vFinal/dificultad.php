@@ -6,7 +6,7 @@
     <title>Simón</title>
 </head>
 <body>
-    <form action="inicio.php" method="post" class="container">
+    <form action="inicio.php" method="post">
         <!-- Control de Círculos -->
         <label for="num">Círculos:</label><br>
         <button type="button"

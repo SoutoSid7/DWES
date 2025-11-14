@@ -31,7 +31,7 @@
         $conn->close();
 
         $solucion = $_SESSION["solucion"];
-        pintarCirculos($solucion[0], $solucion[1], $solucion[2], $solucion[3]);
+        pintarCirculos($solucion);
 
     ?>
     <form action="inicio.php" method="post"><input type="submit" value="Volver a jugar">
