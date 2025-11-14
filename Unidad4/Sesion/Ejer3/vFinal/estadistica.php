@@ -67,7 +67,7 @@ $conn->close();
         <?php endforeach; ?>
     </table>
 
-    <br><form action="dificultad.php" method="post" style="display:inline;">
+    <br><form action="inicio.php" method="post" style="display:inline;">
         <input type="submit" value="Volver a jugar">
     </form>
     <form action="login.php" method="post" style="display:inline;">
