@@ -45,6 +45,9 @@
             $comentario = $_POST["comentario"];
             $genero = isset($_POST ["genero"]) ? $_POST ["genero"] : '';
 
+            // Transformar género
+            $generoDB = ($genero == "Masculino") ? 1 : 0;
+
             echo "<strong>Nombre: </strong>" .$nombre;
             echo "<strong><br>E-mail: </strong>" .$email;
             echo "<strong><br>Web Site: </strong>" .$website;
@@ -53,26 +56,43 @@
 
             include_once 'funcion_validarEmail.php';
             include_once 'funcion_validarUrl.php';
+            $errores = false;
             if(!validar_email($email)){
                 echo "<br>Email no valido";
+                $errores = true;
             }
             if(!validar_url($website)){
                 echo "<br>URL no valida";
+                $errores = true;
             }
+
+            // Validar Contraseña
+
         }
 
-        // Guardar en BBDD
-        // Datos de conexión
-        $hn = 'localhost';
-        $db = 'bdusuario';
-        $un = 'root';
-        $pw = '';
+        // Guardar en BBDD (si errores = false)
+        if(!$errores){
+            // Datos de conexión
+            $hn = 'localhost';
+            $db = 'bdusuario';
+            $un = 'root';
+            $pw = '';
 
-        $conn = new mysqli($hn, $un, $pw, $db);
-        if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
+            $conn = new mysqli($hn, $un, $pw, $db);
+            if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
 
+            // Encriptar contraseña
+            $passwd_hashed = password_hash($passwd, PASSWORD_DEFAULT);
 
+            $sql = "INSERT INTO usuarios (nombre, password, email, web, comentario, genero) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
 
+            $stmt->bind_param("sssssi", $nombre, $passwd_hashed, $email, $website, $comentario, $generoDB);
+            /*
+                bind_param = vincula variables PHP a los parametros ?
+                "ssssi" = s string // i integer
+            */
+        }
     ?>  
 </body>
 </html>
