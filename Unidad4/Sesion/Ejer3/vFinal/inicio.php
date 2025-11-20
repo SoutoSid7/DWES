@@ -20,6 +20,10 @@
         $numCirculos = $_POST['num'] ?? 4; 
         $numColores = $_POST['numColores'] ?? 4;
 
+        // Guardar configuracion 
+        $_SESSION['numCirculos'] = $numCirculos;
+        $_SESSION['numColores'] = $numColores;
+
         $solucion = [];
 
         for($i = 0; $i <$numCirculos; $i++){

@@ -10,35 +10,40 @@ $pw = '';
 $conn = new mysqli($hn, $un, $pw, $db);
 if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
 
-// Consulta para obtener estadísticas por usuario
-$sql = "
-    SELECT
-        u.Codigo AS codigousu,
-        u.Nombre AS nombre,
-        SUM(j.acierto = 1) AS aciertos,
-        SUM(j.acierto = 0) AS fallos,
-        COUNT(j.codjugada) AS total
-    FROM usuarios u
-    LEFT JOIN jugadas j ON u.Codigo = j.codigousu
-    GROUP BY u.Codigo, u.Nombre
-    ORDER BY u.Codigo
-";
-$result = $conn->query($sql);
+// Variables para controlar que mostrar
+$mostrarTabla = false;
+$filtroCirculos = 4;
+$filtroColores = 4;
+$data = [];
 
-// Guardamos datos para la tabla y la gráfica
-$usuarios = [];
-$aciertos = [];
+// Comprobamos si el usuario envio el formulario
+if (isset($_POST['filtrar'])){
+    $mostrarTabla = true;
+    $filtroCirculos = $_POST['numCirculos'];
+    $filtroColores = $_POST['numColores'];
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $usuarios[] = $row['nombre'];
-        $aciertos[] = $row['aciertos'];
-        $data[] = $row;
+    // Consulta para obtener estadísticas por usuario
+    $sql = "
+        SELECT
+            u.Codigo AS codigousu,
+            u.Nombre AS nombre,
+            SUM(j.acierto = 1) AS aciertos,
+            SUM(j.acierto = 0) AS fallos,
+            COUNT(j.codjugada) AS total
+        FROM usuarios u
+        JOIN jugadas j ON u.Codigo = j.codigousu
+        WHERE j.numCirculos = $filtroCirculos
+            AND j.numColores = $filtroColores
+        GROUP BY u.Codigo, u.Nombre
+        ORDER BY u.Codigo
+    ";
+    $result = $conn->query($sql);
+    if ($result && $result->num_rows > 0){
+        while ($row = $result->fetch_assoc()){
+            $data[] = $row;
+        }
     }
-} else {
-    echo "No hay datos disponibles.";
 }
-
 $conn->close();
 ?>
 
@@ -50,28 +55,36 @@ $conn->close();
     <title>Estadísticas</title>
 </head>
 <body>
-    <h1>Simón</h1><h2>Estadísticas de Jugadas</h2>
+    <h1>Simón</h1>
+    <h2>Estadísticas de Jugadas</h2>
 
-    <table border="1">
-        <tr>
-            <th>Código Usuario</th>
-            <th>Nombre</th>
-            <th>Número aciertos</th>
-        </tr>
-        <?php foreach ($data as $row): ?>
-        <tr>
-            <td><?= $row['codigousu'] ?></td>
-            <td><?= $row['nombre'] ?></td>
-            <td><?= $row['aciertos'] ?></td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
+    <?php if (!$mostrarTabla): ?>
+        <form action="estadistica.php" method="post">
+            <label>Numero de Circulos:</label>
+            <select name="numCirculos">
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select> <br>
 
-    <br><form action="inicio.php" method="post" style="display:inline;">
-        <input type="submit" value="Volver a jugar">
-    </form>
-    <form action="login.php" method="post" style="display:inline;">
-        <input type="submit" value="Cerrar sesión">
-    </form>
+            <label>Numero de Colores:</label>
+            <select name="numColores">
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+
+            <br><br><input type="submit" name="filtrar" value="Ver Estadísticas">
+        </form>
+
+    <?php endif; ?>
+        <table border="1"></table>
+        <form action="estadistica.php" method="post">
+            <br><input type="submit" value="Consultar otra dificultad">
+        </form>
 </body>
 </html>

@@ -26,7 +26,12 @@
         // Recuperar el ID del usuario de la sesión
         $codusu = $_SESSION['id'];
 
-        $sql = "INSERT INTO jugadas (codigousu, acierto) VALUES ('$codusu', 0)"; // 0 para fallo
+        // Recuperar config sesion
+        $nCirculos = $_SESSION['numCirculos'];
+        $nColores = $_SESSION['numColores'];
+        
+
+        $sql = "INSERT INTO jugadas (codigousu, acierto, numCirculos, numColores) VALUES ('$codusu', 0, '$nCirculos', '$nColores')"; // 0 para fallo
         $conn->query($sql);
         $conn->close();
 
