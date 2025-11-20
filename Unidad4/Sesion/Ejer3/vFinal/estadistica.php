@@ -25,17 +25,17 @@ if (isset($_POST['filtrar'])){
     // Consulta para obtener estadísticas por usuario
     $sql = "
         SELECT
+            j.codjugada,
             u.Codigo AS codigousu,
             u.Nombre AS nombre,
-            SUM(j.acierto = 1) AS aciertos,
-            SUM(j.acierto = 0) AS fallos,
-            COUNT(j.codjugada) AS total
-        FROM usuarios u
-        JOIN jugadas j ON u.Codigo = j.codigousu
+            j.acierto,
+            j.numCirculos,
+            j.numColores
+        FROM jugadas j
+        JOIN usuarios u ON u.Codigo = j.codigousu
         WHERE j.numCirculos = $filtroCirculos
             AND j.numColores = $filtroColores
-        GROUP BY u.Codigo, u.Nombre
-        ORDER BY u.Codigo
+        ORDER BY nombre
     ";
     $result = $conn->query($sql);
     if ($result && $result->num_rows > 0){
@@ -82,9 +82,31 @@ $conn->close();
         </form>
 
     <?php endif; ?>
-        <table border="1"></table>
+
+<?php if ($mostrarTabla): ?>
+    <h3>Jugadas con <?=$filtroCirculos?> círculos y <?=$filtroColores?> colores</h3>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Código Jugada</th>
+            <th>Código Usuario</th>
+            <th>Nombre Usuario</th>
+            <th>Acierto</th>
+
+        </tr>
+
+        <?php foreach ($data as $row): ?>
+            <tr>
+                <td><?= $row['codjugada'] ?></td>
+                <td><?= $row['codigousu'] ?></td>
+                <td><?= $row['nombre'] ?></td>
+                <td><?= ($row['acierto'] == 1 ? "Acierto" : "Fallo") ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>
         <form action="estadistica.php" method="post">
             <br><input type="submit" value="Consultar otra dificultad">
         </form>
-</body>
+</body> 
 </html>
