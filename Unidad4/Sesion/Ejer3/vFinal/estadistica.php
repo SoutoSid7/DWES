@@ -58,9 +58,9 @@ $conn->close();
     <h1>Simón</h1>
     <h2>Estadísticas de Jugadas</h2>
 
-    <?php if (!$mostrarTabla): ?>
+    <?php if (!$mostrarTabla): ?> <!--Sirve para alternar entre dos pantallas-->
         <form action="estadistica.php" method="post">
-            <label>Numero de Circulos:</label>
+            <label>Número de Circulos:</label>
             <select name="numCirculos">
                 <option value="4">4</option>
                 <option value="5">5</option>
@@ -69,7 +69,7 @@ $conn->close();
                 <option value="8">8</option>
             </select> <br>
 
-            <label>Numero de Colores:</label>
+            <label>Número de Colores:</label>
             <select name="numColores">
                 <option value="4">4</option>
                 <option value="5">5</option>
@@ -83,30 +83,46 @@ $conn->close();
 
     <?php endif; ?>
 
-<?php if ($mostrarTabla): ?>
-    <h3>Jugadas con <?=$filtroCirculos?> círculos y <?=$filtroColores?> colores</h3>
+    <?php if ($mostrarTabla): ?>
+        <h3>Jugadas con <?=$filtroCirculos?> círculos y <?=$filtroColores?> colores</h3>
 
-    <table border="1" cellpadding="5">
-        <tr>
-            <th>Código Jugada</th>
-            <th>Código Usuario</th>
-            <th>Nombre Usuario</th>
-            <th>Acierto</th>
-
-        </tr>
-
-        <?php foreach ($data as $row): ?>
+        <table border="1" cellpadding="5">
             <tr>
-                <td><?= $row['codjugada'] ?></td>
-                <td><?= $row['codigousu'] ?></td>
-                <td><?= $row['nombre'] ?></td>
-                <td><?= ($row['acierto'] == 1 ? "Acierto" : "Fallo") ?></td>
+                <th>Código Jugada</th>
+                <th>Código Usuario</th>
+                <th>Nombre Usuario</th>
+                <th>Acierto</th>
+
             </tr>
-        <?php endforeach; ?>
+
+            <?php foreach ($data as $row): ?>
+                <tr>
+                    <td><?= $row['codjugada'] ?></td>
+                    <td><?= $row['codigousu'] ?></td>
+                    <td><?= $row['nombre'] ?></td>
+                    <td><?= ($row['acierto'] == 1 ? "Acierto" : "Fallo") ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
+    <table>
+        <tr>
+            <td>
+                <form action="estadistica.php" method="post">
+                    <br><input type="submit" value="Consultar otra dificultad">
+                </form>
+            </td>
+            <td>
+                <form action="login.php" method="post">
+                    <br><input type="submit" value="Iniciar Sesion">
+                </form>
+            </td>
+            <td>
+                <form action="inicio.php" method="post">
+                    <br><input type="submit" value="Volver a Jugar">
+                </form>
+            </td>
+        </tr>
     </table>
-<?php endif; ?>
-        <form action="estadistica.php" method="post">
-            <br><input type="submit" value="Consultar otra dificultad">
-        </form>
 </body> 
 </html>
