@@ -20,6 +20,7 @@
     </form>
 
     <?php
+        session_start();
         if(isset($_POST["boton"])){
             $nombre = $_POST["nombre"] ?? '';
             $clave = $_POST["clave"] ?? '';
@@ -40,10 +41,9 @@
             $resultado = $stmt->get_result();
 
             if($resultado->num_rows == 1){
+                $_SESSION["nombre"] = $nombre;
                 header("Location: inicio.php");
                 exit;
-            } else {
-                echo "MAL";
             }
         }        
     ?>

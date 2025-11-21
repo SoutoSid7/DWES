@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>Agenda</title>
 </head>
 <body>
-    <h1>HOLA
-        
-    </h1>
+    <h1>AGENDA</h1>
+    <?php
+        session_start();
+        echo "Hola " .$_SESSION["nombre"];
+    ?>
 </body>
 </html>
