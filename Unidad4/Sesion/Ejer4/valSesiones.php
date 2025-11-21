@@ -73,7 +73,6 @@
 
             // Validar Contraseña
             $patronPass = "/^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{8,}$/";
-
             if (!preg_match($patronPass, $passwd)) {
                 echo "<br>La contraseña debe tener al menos 8 caracteres, incluir letras, números y un carácter especial.";
                 $errores = true;
