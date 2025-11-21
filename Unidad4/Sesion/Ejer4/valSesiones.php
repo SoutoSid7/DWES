@@ -9,7 +9,7 @@
     <h1>Validacion de Formularios</h1>
     <form action="valSesiones.php" method="post">
         <label for="nombre">Nombre: </label>
-        <input type="text" id="nombre" name="nombre" required pattern="[A-za-z\s]+" title="Solo se admiten letras">
+        <input type="text" id="nombre" name="nombre" required pattern="[A-Za-z\s]+" title="Solo se admiten letras">
 
         <br><br>
         <label for="passwd">Contraseña: </label>
@@ -17,11 +17,11 @@
 
         <br><br>
         <label for="email">E-mail: </label>
-        <input type="text" id="email" name="email">
+        <input type="email" id="email" name="email">
 
         <br><br>
         <label for="website">Web Site: </label>
-        <input type="text" id="website" name="website">
+        <input type="url" id="website" name="website">
 
         <br><br>
         <label for="comentario">Comentario: </label>
@@ -37,9 +37,12 @@
     </form>
 
     <?php
+        $errores = true;
         if(isset($_POST["boton"])){   // Hasta que no se envia no aparecen los datos
+            $errores = false;
             echo "<h2>Tu información</h2>";
             $nombre = $_POST["nombre"] ? $_POST["nombre"] : '';
+            $passwd = $_POST["passwd"] ?? '';
             $email = $_POST["email"];
             $website = $_POST["website"];
             $comentario = $_POST["comentario"];
@@ -48,11 +51,11 @@
             // Transformar género
             $generoDB = ($genero == "Masculino") ? 1 : 0;
 
-            echo "<strong>Nombre: </strong>" .$nombre;
-            echo "<strong><br>E-mail: </strong>" .$email;
-            echo "<strong><br>Web Site: </strong>" .$website;
-            echo "<strong><br>Comentario: </strong>" .$comentario;
-            echo "<strong><br>Genero: </strong>" .$genero;
+            echo "<strong>Nombre: </strong>" .htmlspecialchars($nombre);
+            echo "<strong><br>E-mail: </strong>" .htmlspecialchars($email);
+            echo "<strong><br>Web Site: </strong>" .htmlspecialchars($website);
+            echo "<strong><br>Comentario: </strong>" .htmlspecialchars($comentario);
+            echo "<strong><br>Genero: </strong>" .htmlspecialchars($genero);
 
             include_once 'funcion_validarEmail.php';
             include_once 'funcion_validarUrl.php';
@@ -66,8 +69,15 @@
                 $errores = true;
             }
 
-            // Validar Contraseña
+            $passwd = $_POST["passwd"] ?? '';
 
+            // Validar contraseña
+            $patronPass = "/^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{8,}$/";
+
+            if (!preg_match($patronPass, $passwd)) {
+                echo "<br>La contraseña debe tener al menos 8 caracteres, incluir letras, números y un carácter especial.";
+                $errores = true;
+            }
         }
 
         // Guardar en BBDD (si errores = false)
@@ -92,6 +102,12 @@
                 bind_param = vincula variables PHP a los parametros ?
                 "ssssi" = s string // i integer
             */
+
+            if($stmt->execute()){
+                echo "<br>Datos Guardados Correctamente";
+            } else {
+                echo "<br>Error " .$stmt->error;
+            }
         }
     ?>  
 </body>
