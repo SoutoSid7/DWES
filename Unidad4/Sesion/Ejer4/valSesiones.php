@@ -9,7 +9,7 @@
     <h1>Validacion de Formularios</h1>
     <form action="valSesiones.php" method="post">
         <label for="nombre">Nombre: </label>
-        <input type="text" id="nombre" name="nombre" required pattern="[A-Za-z\s]+" title="Solo se admiten letras">
+        <input type="text" id="nombre" name="nombre"s>
 
         <br><br>
         <label for="passwd">Contraseña: </label>
@@ -71,11 +71,19 @@
 
             $passwd = $_POST["passwd"] ?? '';
 
-            // Validar contraseña
+            // Validar Contraseña
             $patronPass = "/^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{8,}$/";
 
             if (!preg_match($patronPass, $passwd)) {
                 echo "<br>La contraseña debe tener al menos 8 caracteres, incluir letras, números y un carácter especial.";
+                $errores = true;
+            }
+
+            // Validar Nombre
+            $nombre = $_POST["nombre"] ?? '';
+            $patronNombre = "/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/";
+            if (!preg_match($patronNombre, $nombre)) {
+                echo "<br>Nombre no válido. Solo se admiten letras y espacios.";
                 $errores = true;
             }
         }
