@@ -8,7 +8,7 @@
 <body>
     <h1>Agenda De Contactos</h1>
     <form action="index.php" method="post">
-        <label for="nombre">Nombre: </label>
+        <label for="nombre">Nombr0e: </label>
         <input type="text" id="nombre" name="nombre">
 
         <br><br>
