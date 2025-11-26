@@ -15,5 +15,11 @@
     <br><form action="index.php" method="post" style="display:inline;">
         <input type="submit" value="Volver a iniciar sesion">
     </form>
+    <br><form action="inicio.php" method="post" style="display:inline;">
+        <input type="submit" value="Introducir mas contactos para " <?php echo $_SESSIO["nombre"]; ?>>
+    </form>
+    <br><form action="totales.php" method="post" style="display:inline;">
+        <input type="submit" value="Total de contactos guardados">
+    </form>
 </body>
 </html>
