@@ -1,24 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda de Contactos</title>
-</head>
-<body>
-    <h1>Agenda De Contactos</h1>
-    <form action="index.php" method="post">
-        <label for="nombre">Nombre: </label>
-        <input type="text" id="nombre" name="nombre">
-
-        <br><br>
-        <label for="calve">Clave: </label>
-        <input type="password" id="clave" name="clave">
-
-        <br><br>
-        <input type="submit" name="boton" value="Entrar">
-    </form>
-
     <?php
         session_start();
         if(isset($_POST["boton"])){
@@ -47,5 +26,25 @@
             }
         }        
     ?>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Agenda de Contactos</title>
+    </head>
+    <body>
+        <h1>Agenda De Contactos</h1>
+        <form action="index.php" method="post">
+            <label for="nombre">Nombre: </label>
+            <input type="text" id="nombre" name="nombre">
+
+            <br><br>
+            <label for="calve">Clave: </label>
+            <input type="password" id="clave" name="clave">
+
+            <br><br>
+            <input type="submit" name="boton" value="Entrar">
+        </form>
+    </body>
+    </html>
