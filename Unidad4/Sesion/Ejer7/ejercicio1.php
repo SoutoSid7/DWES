@@ -10,8 +10,7 @@
     <?php
         session_start();
         if(isset($_POST["boton"])){
-            $dniA = $_POST["dni"] ?? '';
-            $dniP = $_POST["dni"] ?? '';
+            $dni = $_POST["dni"] ?? '';
 
             // Datos de Conexion 
             $hn = 'localhost';
@@ -26,11 +25,12 @@
             $sql = "SELECT * FROM alumno WHERE dniA = ?;";
             $stmt = $conn->prepare($sql);
             if($stmt){
-                $stmt-> bind_param("s", $dniA);
+                $stmt-> bind_param("s", $dni);
                 $stmt->execute();
                 $resultado = $stmt->get_result();
 
                 if($resultado->num_rows == 1){
+                    $row = $resultado->fetch_assoc();
                     $_SESSION["nombre"] = $row['nombreA'] ?? '';
                     $stmt->close();
                     $conn->close();
@@ -44,11 +44,12 @@
             $sql = "SELECT * FROM profesor WHERE dniP = ?;";
             $stmt = $conn->prepare($sql);
             if($stmt){
-                $stmt-> bind_param("s", $dniP);
+                $stmt-> bind_param("s", $dni);
                 $stmt->execute();
                 $resultado = $stmt->get_result();
 
                 if($resultado->num_rows == 1){
+                    $row = $resultado->fetch_assoc();
                     $_SESSION["nombre"] = $row['nombreP'] ?? '';
                     $stmt->close();
                     $conn->close();

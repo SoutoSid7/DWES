@@ -6,6 +6,9 @@
     <title>Ejercicio2</title>
 </head>
 <body>
-    <h1>QW</h1>
+    <?php
+        session_start();
+        echo "<h4>PROFESOR </h4>" .$_SESSION["nombre"] ."<h4>NOMBRE </h4>";
+    ?>
 </body>
 </html>
