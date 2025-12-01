@@ -1,3 +1,50 @@
+<?php
+    session_start();
+    echo "<br>PROFESOR:    " .$_SESSION["dni"] ." NOMBRE:  " .$_SESSION["nombre"];
+
+    $dni = $_SESSION["dni"] ?? '';
+
+    // Datos de Conexion
+    $hn = 'localhost';
+    $db = 'oposicion';
+    $un = 'root';
+    $pw = '';
+
+    $conn = new mysqli($hn, $un, $pw, $db);
+    if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
+
+    // Consulta SQL
+    $sql = "
+            SELECT c.codigocurso, c.nombrecurso, c.maxalumnos, c.fechaini, c.fechafin, c.numhoras, c.profesor
+            FROM curso c
+            WHERE c.profesor = ?;
+            ";
+    $stmt = $conn->prepare($sql);
+    $stmt-> bind_param("s", $dni);
+    $stmt->execute();
+
+    $resultado = $stmt->get_result();
+
+    $data = [];
+    if($resultado && $resultado-> num_rows > 0){
+        while($row = $resultado->fetch_assoc()){
+            $data[] = $row;
+        }
+    }
+
+    $sql2 = "SELECT SUM(numhoras) AS total_horas FROM curso WHERE profesor = ?;";
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2-> bind_param("s", $dni);
+    $stmt2->execute();
+    $resultado2 = $stmt2->get_result();
+
+    if ($resultado2 && $fila2 = $resultado2->fetch_assoc()) { //Obtiene consulta ok y fila de resultados
+        $total_horas = $fila2['total_horas'] ?? 0;  // si es null pone 0
+    }
+
+    echo "<br>Numero de horas totales: " .$total_horas ; 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +53,28 @@
     <title>Ejercicio2</title>
 </head>
 <body>
-    <?php
-        session_start();
-        echo "<h4>PROFESOR </h4>" .$_SESSION["nombre"] ."<h4>NOMBRE </h4>";
-    ?>
+    <br><br>
+    <table border="1">
+        <tr>
+            <th>codigocurso</th>
+            <th>nombrecurso</th>
+            <th>maxalumnos</th>
+            <th>fechaini</th>
+            <th>fechafin</th>
+            <th>numhoras</th>
+            <th>profesor</th>
+        </tr>
+        <?php foreach ($data as $row): ?>
+        <tr>
+            <td><?= $row['codigocurso'] ?></td>
+            <td><?= $row['nombrecurso'] ?></td>
+            <td><?= $row['maxalumnos'] ?></td>
+            <td><?= $row['fechaini'] ?></td>
+            <td><?= $row['fechafin'] ?></td>
+            <td><?= $row['numhoras'] ?></td>
+            <td><?= $row['profesor'] ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
 </body>
 </html>
