@@ -31,18 +31,6 @@
             $data[] = $row;
         }
     }
-
-    $sql2 = "SELECT SUM(numhoras) AS total_horas FROM curso WHERE profesor = ?;";
-    $stmt2 = $conn->prepare($sql2);
-    $stmt2-> bind_param("s", $dni);
-    $stmt2->execute();
-    $resultado2 = $stmt2->get_result();
-
-    if ($resultado2 && $fila2 = $resultado2->fetch_assoc()) { //Obtiene consulta ok y fila de resultados
-        $total_horas = $fila2['total_horas'] ?? 0;  // si es null pone 0
-    }
-
-    echo "<br>Numero de horas totales: " .$total_horas ; 
 ?>
 
 <!DOCTYPE html>
@@ -56,13 +44,13 @@
     <br><br>
     <table border="1">
         <tr>
-            <th>codigocurso</th>
-            <th>nombrecurso</th>
-            <th>maxalumnos</th>
-            <th>fechaini</th>
-            <th>fechafin</th>
-            <th>numhoras</th>
-            <th>profesor</th>
+            <th>Codigo Del Curso</th>
+            <th>Nombre Del Curso</th>
+            <th>Max Alumnos</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Num Horas</th>
+            <th>Profesor</th>
         </tr>
         <?php foreach ($data as $row): ?>
         <tr>
@@ -76,5 +64,19 @@
         </tr>
         <?php endforeach; ?>
     </table>
+
+    <?php
+        $sql2 = "SELECT SUM(numhoras) AS total_horas FROM curso WHERE profesor = ?;";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2-> bind_param("s", $dni);
+        $stmt2->execute();
+        $resultado2 = $stmt2->get_result();
+
+        if ($resultado2 && $fila2 = $resultado2->fetch_assoc()) { //Obtiene consulta ok y fila de resultados
+            $total_horas = $fila2['total_horas'] ?? 0;  // si es null pone 0
+        }
+
+        echo "<br>Numero de horas totales: " .$total_horas ; 
+    ?>
 </body>
 </html>
