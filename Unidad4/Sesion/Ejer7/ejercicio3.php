@@ -37,7 +37,7 @@
     
         <br><br>
         <label for="genero">INSCRIPCIÓN: </label>
-        <input type="date" id="inscripcion" name="inscripcion">
+        <input type="date" id="inscripcion" name="inscripcion"> 
 
         <br><br>
         <input type="submit" name="boton" value="GUARDAR">
