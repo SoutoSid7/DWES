@@ -22,20 +22,45 @@
             $conn = new mysqli($hn, $un, $pw, $db);
             if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
 
-            $sql = "SELECT * FROM alumno WHERE dniA = ? 
-                    OR 
-                    SELECT * FROM profesor WHERE dniP = ?;";
+            // Buscar Alumno
+            $sql = "SELECT * FROM alumno WHERE dniA = ?;";
             $stmt = $conn->prepare($sql);
-            $stmt-> bind_param("ss", $dniA, $dniP);
-            $stmt->execute();
-            $resultado = $stmt->get_result();
+            if($stmt){
+                $stmt-> bind_param("s", $dniA);
+                $stmt->execute();
+                $resultado = $stmt->get_result();
 
-            if($resultado->num_rows == 1){
-                $_SESSION["nombre"] = $nombre;
-                header("Location: ejercicio3.php");
-                exit;
+                if($resultado->num_rows == 1){
+                    $_SESSION["nombre"] = $row['nombreA'] ?? '';
+                    $stmt->close();
+                    $conn->close();
+                    header("Location: ejercicio3.php");
+                    exit;
+                }
+                $stmt->close();
             }
 
+            // Buscar Profesor
+            $sql = "SELECT * FROM profesor WHERE dniP = ?;";
+            $stmt = $conn->prepare($sql);
+            if($stmt){
+                $stmt-> bind_param("s", $dniP);
+                $stmt->execute();
+                $resultado = $stmt->get_result();
+
+                if($resultado->num_rows == 1){
+                    $_SESSION["nombre"] = $row['nombreP'] ?? '';
+                    $stmt->close();
+                    $conn->close();
+                    header("Location: ejercicio2.php");
+                    exit;
+                }
+                $stmt->close();
+            }
+            if($resultado->num_rows == 0){
+                echo "<p>DNI no encontrado</p>";
+            }
+            $conn->close();
         }
     ?>
 
