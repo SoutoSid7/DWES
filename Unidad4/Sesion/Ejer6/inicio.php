@@ -1,7 +1,8 @@
 <?php
     session_start();
     if(isset($_POST["enviar"])){
-        $nombre = $_POST["sol"] ?? '';
+        $respuesta = $_POST["sol"] ?? '';
+        $usuario = $_SESSION["usuario"]; 
 
         // Datos de conexión
         $hn = 'localhost';
@@ -12,20 +13,10 @@
         $conn = new mysqli($hn, $un, $pw, $db);
         if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
 
-        $sql = "SELECT * FROM jugador WHERE nombre = ? AND clave = ?;";
+        $sql = "INSERT INTO respuestas (fecha, login, hora, respuesta) VALUES (CURDATE(), ?, CURTIME(), ?);";
         $stmt = $conn->prepare($sql); 
-        $stmt->bind_param("ss", $nombre, $clave);
+        $stmt->bind_param("ss", $usuario, $respuesta);
         $stmt->execute();
-        $resultado = $stmt->get_result();
-
-        if($resultado->num_rows == 1){
-            $_SESSION["usuario"] = $nombre;
-            header("Location: inicio.php");
-            exit;
-        } else {
-            echo "Credenciales Incorrectas. Intentelo de nuevo";
-        }
-
     }
 ?>
 
