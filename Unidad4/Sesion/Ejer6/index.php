@@ -24,7 +24,7 @@
             header("Location: inicio.php");
             exit;
         } else {
-            echo "Error";
+            echo "Credenciales Incorrectas. Intentelo de nuevo";
         }
 
     }
