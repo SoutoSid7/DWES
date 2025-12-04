@@ -14,7 +14,7 @@
             if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
 
             $sql = "SELECT * FROM usuarios WHERE nombre = ? AND clave = ?;";
-            $stmt = $conn->prepare($sql);
+            $stmt = $conn->prepare($sql); 
             $stmt->bind_param("ss", $nombre, $clave);
             $stmt->execute();
             $resultado = $stmt->get_result();
