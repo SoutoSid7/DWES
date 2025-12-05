@@ -65,14 +65,10 @@
         }
     }
 
-    // Sumar Un Punto Jugador Acerto
-    $sql = "SELECT r.*
-        FROM respuestas r
-        JOIN solucion s ON r.fecha = s.fecha
-        WHERE r.fecha = CURDATE()
-            AND r.respuesta = s.solucion;
-        ";
-    $punto = $conn->query($sql);
+    if(isset($_POST["puntos"])){
+        header("Location: puntos.php");
+        exit;
+    }
 
 ?>
 
@@ -113,5 +109,9 @@
         </tr>
         <?php endforeach; ?>
     </table>
+
+    <form action="resultado.php" method="post">
+        <br><br><input type="submit" name="puntos" value="Ver puntos por jugador">
+    </form>
 </body>
 </html>
