@@ -37,11 +37,11 @@
     $sqlNombreFallo = "SELECT j.nombre, r.hora
             FROM respuestas r
             JOIN jugador j ON r.login = j.login
-            JOIN solucion s ON r.fehca = s.fecha
-            WHERE r.fecha = CUERDATE()
+            JOIN solucion s ON r.fecha = s.fecha
+            WHERE r.fecha = CURDATE()
                 AND r.respuesta <> s.solucion
             ORDER BY r.hora;";
-    $fallos = $conn->query($sqlNombreFallo)
+    $fallos = $conn->query($sqlNombreFallo);
 ?>
 
 <!DOCTYPE html>
@@ -54,5 +54,18 @@
 <body>
     <h1>Fecha <?php echo date("d-m-Y"); ?></h1>
     <h3>Numero de jugadores acertantes: <?php echo $num_acertantes; ?> </h3>
+
+    <table border="1">
+        <tr>
+            <th>Login</th>
+            <th>Hora</th>
+        </tr>
+        <?php foreach ($data as $row): ?>
+        <tr>
+            <td><?= $row['codigousu'] ?></td>
+            <td><?= $row['nombre'] ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
 </body>
 </html>
