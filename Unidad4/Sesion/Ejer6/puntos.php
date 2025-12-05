@@ -20,6 +20,24 @@
             ";
     $punto = $conn->query($sql);
 
+    // Login Puntos
+    $sqlLoginPuntos = "SELECT j.nombre, j.puntos
+            FROM jugador j
+            ORDER BY j.puntos DESC;
+            ";
+    $sql = $conn->query($sqlLoginPuntos);
+
+    $nombre = [];
+    $puntos = [];
+
+    if($sql->num_rows > 0){
+        while ($row = $sql->fetch_assoc()){
+            $nombre[] = $row['nombre'];
+            $puntos[] = $row['puntos'];
+            $data[] = $row;
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -31,5 +49,17 @@
 </head>
 <body>
     <h1>Puntos Por Jugador</h1>
+    <table border="1">
+        <tr>
+            <th>Login</th>
+            <th>Puntos</th>
+        </tr>
+        <?php foreach ($data as $row): ?>
+        <tr>
+            <td><?= $row['nombre'] ?></td>
+            <td><?= $row['puntos'] ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
 </body>
 </html>
