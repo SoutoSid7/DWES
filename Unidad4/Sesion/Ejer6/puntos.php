@@ -37,7 +37,6 @@
             $data[] = $row;
         }
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +57,19 @@
         <tr>
             <td><?= $row['nombre'] ?></td>
             <td><?= $row['puntos'] ?></td>
+            <td>
+                <?php 
+                    $max = 200;
+                    $porcentaje = ($row['puntos'] / $max) * 100;
+                ?>
+                <   555;">
+                    <div style="
+                        width: <?php echo $porcentaje; ?>%;
+                        height: 30px;
+                        background: #72c5eb;">
+                    </div>
+                </div>
+            </td>
         </tr>
         <?php endforeach; ?>
     </table>
