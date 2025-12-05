@@ -64,6 +64,16 @@
             $data2[] = $row2;
         }
     }
+
+    // Sumar Un Punto Jugador Acerto
+    $sql = "SELECT r.*
+        FROM respuestas r
+        JOIN solucion s ON r.fecha = s.fecha
+        WHERE r.fecha = CURDATE()
+            AND r.respuesta = s.solucion;
+        ";
+    $punto = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
