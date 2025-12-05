@@ -62,7 +62,7 @@
                     $max = 200;
                     $porcentaje = ($row['puntos'] / $max) * 100;
                 ?>
-                <   555;">
+                <div style="width:300px; border:1px solid #555;">
                     <div style="
                         width: <?php echo $porcentaje; ?>%;
                         height: 30px;
