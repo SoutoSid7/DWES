@@ -33,6 +33,17 @@
             ";
     $nombreAciertos = $conn->query($sqlNombreAcertantes);
 
+    $nombre = [];
+    $hora = [];
+
+    if($nombreAciertos->num_rows > 0){
+        while ($row = $nombreAciertos->fetch_assoc()){
+            $nombre[] = $row['nombre'];
+            $hora[] = $row['hora'];
+            $data[] = $row;
+        }
+    }
+
     // Jugadores Fallan NOMBRE & HORA
     $sqlNombreFallo = "SELECT j.nombre, r.hora
             FROM respuestas r
@@ -58,12 +69,12 @@
     <table border="1">
         <tr>
             <th>Login</th>
-            <th>Hora</th>
+            <th>Fecha</th>
         </tr>
         <?php foreach ($data as $row): ?>
         <tr>
-            <td><?= $row['codigousu'] ?></td>
             <td><?= $row['nombre'] ?></td>
+            <td><?= $row['hora'] ?></td>
         </tr>
         <?php endforeach; ?>
     </table>
