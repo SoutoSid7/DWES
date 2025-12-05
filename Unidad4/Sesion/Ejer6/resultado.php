@@ -53,6 +53,17 @@
                 AND r.respuesta <> s.solucion
             ORDER BY r.hora;";
     $fallos = $conn->query($sqlNombreFallo);
+
+    $nombre = [];
+    $hora = [];
+
+    if($fallos->num_rows > 0){
+        while ($row2 = $fallos->fetch_assoc()){
+            $nombre[] = $row2['nombre'];
+            $hora[] = $row2['hora'];
+            $data2[] = $row2;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +75,7 @@
 </head>
 <body>
     <h1>Fecha <?php echo date("d-m-Y"); ?></h1>
-    <h3>Numero de jugadores acertantes: <?php echo $num_acertantes; ?> </h3>
+    <h3>Numero De Jugadores Acertantes: <?php echo $num_acertantes; ?> </h3>
 
     <table border="1">
         <tr>
@@ -75,6 +86,20 @@
         <tr>
             <td><?= $row['nombre'] ?></td>
             <td><?= $row['hora'] ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+
+    <h3>Jugadores Que Han Fallado</h3>
+    <table border="1">
+        <tr>
+            <th>Login</th>
+            <th>Fecha</th>
+        </tr>
+        <?php foreach ($data2 as $row2): ?>
+        <tr>
+            <td><?= $row2['nombre'] ?></td>
+            <td><?= $row2['hora'] ?></td>
         </tr>
         <?php endforeach; ?>
     </table>
