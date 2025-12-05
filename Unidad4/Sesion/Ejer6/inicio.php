@@ -20,13 +20,11 @@
     }
 
     if(isset($_POST["resultados"])){
-        $_SESSION["usuario"] = $nombre;
         header("Location: resultado.php");
         exit;
     }
 
     if(isset($_POST["puntos"])){
-        $_SESSION["usuario"] = $nombre;
         header("Location: puntos.php");
         exit;
     }

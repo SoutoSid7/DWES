@@ -13,7 +13,7 @@
         $conn = new mysqli($hn, $un, $pw, $db);
         if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
 
-        $sql = "SELECT * FROM jugador WHERE nombre = ? AND clave = ?;";
+        $sql = "SELECT * FROM jugador WHERE login = ? AND clave = ?;";
         $stmt = $conn->prepare($sql); 
         $stmt->bind_param("ss", $nombre, $clave);
         $stmt->execute();
