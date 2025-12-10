@@ -1,12 +1,50 @@
 <?php
     session_start();
-    $nombre = $_SESSION["nombre"];
-
-    $productos = [] 
-
-    if(isset($_POST["btnMonitor"])){
-        
+    if(isset($_POST["nombre"])){
+        $_SESSION["nombre"] = $_POST["nombre"];
     }
+
+    $nombre = $_SESSION["nombre"] ?? '';
+
+    // Array Productos
+    $productos = [
+        "monitor" => ["nombre" => "Monitor", "descripcion" => "22 pulgadas", "precio" => 210],
+        "movil" => ["nombre" => "Movil", "descripcion" => "4g", "precio" => 300],
+        "mp4" => ["nombre" => "Mp4", "descripcion" => "20gb", "precio" => 13],
+        "raton" => ["nombre" => "Raton", "descripcion" => "6000 dpi", "precio" => 20],
+        "alfombrilla" => ["nombre" => "Alfombrilla", "descripcion" => "negra", "precio" => 30],
+        "usb" => ["nombre" => "Usb", "descripcion" => "2gb", "precio" => 5]
+    ];
+
+    // Inizializar Carrito
+    if(!isset($_SESSION["carrito"])){
+        $_SESSION["carrito"] = [];
+    }
+
+    // Añadir Producto
+    if(isset($_POST["add"])){ 
+        $id = $_POST["add"]; // guarda en $id el valor del boton
+
+        if(!isset($_SESSION["carrito"][$id])){
+            $_SESSION["carrito"][$id] = 1; // Si el producto no esta en el carrito pone "1"
+        } else {
+            $_SESSION["carrito"][$id]++; // Si esta le suma
+        }
+    }
+
+    // Quitar Producto
+    if(isset($_POST["remove"])){
+        $id = $_POST["remove"]; // guarda en $id el producto a borrar
+
+        if(isset($_SESSION["carrito"][$id])){ 
+            $_SESSION["carrito"][$id]--; // Si el producto esta en el carrito le resta 1
+            
+            if($_SESSION["carrito"][$id] <= 0){
+                unset($_SESSION["carrito"][$id]); // Si despues queda 0 o menos, lo borra del carrito
+            }
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +55,7 @@
 </head>
 <body>
     <h3>Bienvenido, <?php echo $nombre; ?> </h3>
+    <!-- TABLA DE PRODUCTOS -->
     <table border="1">
         <tr>
             <th>Producto</th>
@@ -25,79 +64,49 @@
             <th></th>
         </tr>
 
+        <?php foreach ($productos as $id => $p): ?>
         <tr>
-            <td>Monitor</td>
-            <td>22 pulgadas</td>
-            <td>210€</td>
+            <td><?= $p["nombre"] ?></td>
+            <td><?= $p["descripcion"] ?></td>
+            <td><?= $p["precio"] ?>€</td>
             <td>
-                <form action="producto.php" method="POST">
-                    <input type="hidden" name="producto" value="monitor">
-                    <button type="submit" name="btnMonitor">Añadir al carrito</button>
+                <form method="POST">
+                    <button type="submit" name="add" value="<?= $id ?>">Añadir al carrito</button>
                 </form>
             </td>
         </tr>
-
-        <tr>
-            <td>Movil</td>
-            <td>4g</td>
-            <td>300€</td>
-            <td>
-                <form action="producto.php" method="POST">
-                    <input type="hidden" name="producto" value="movil">
-                    <button type="submit" name="btnMovil">Añadir al carrito</button>
-                </form>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Mp4</td>
-            <td>20gb</td>
-            <td>13€</td>
-            <td>
-                <form action="producto.php" method="POST">
-                    <input type="hidden" name="producto" value="mp4">
-                    <button type="submit" name="btnMp4">Añadir al carrito</button>
-                </form>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Raton</td>
-            <td>6000 dpi</td>
-            <td>20€</td>
-            <td>
-                <form action="producto.php" method="POST">
-                    <input type="hidden" name="producto" value="raton">
-                    <button type="submit" name="btnRaton">Añadir al carrito</button>
-                </form>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Alfombrilla</td>
-            <td>Negra</td>
-            <td>30€</td>
-            <td>
-                <form action="producto.php" method="POST">
-                    <input type="hidden" name="producto" value="alfombrilla">
-                    <button type="submit" name="btnAlfombrilla">Añadir al carrito</button>
-                </form>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Usb</td>
-            <td>2gb</td>
-            <td>5€</td>
-            <td>
-                <form action="producto.php" method="POST">
-                    <input type="hidden" name="producto" value="usb">
-                    <button type="submit" name="btnUsb">Añadir al carrito</button>
-                </form>
-            </td>
-        </tr>
+        <?php endforeach; ?>
     </table>
 
     <h3>Carrito</h3>
+
+    <?php if (empty($_SESSION["carrito"])): ?>
+        <p>El carrito está vacío.</p>
+    <?php else: ?>
+
+    <table border="1">
+        <tr>
+            <th>Producto</th>
+            <th>Unidades</th>
+            <th>Quitar</th>
+        </tr>
+
+        <?php foreach ($_SESSION["carrito"] as $id => $cantidad): ?>
+        <tr>
+            <td><?= $productos[$id]["nombre"] ?></td>
+            <td><?= $cantidad ?></td>
+            <td>
+                <form method="POST">
+                    <button type="submit" name="remove" value="<?= $id ?>">-</button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+
+    <form action="confirmar.php" method="POST">
+        <button type="submit">Confirmar Compra</button>
+    </form>
+    <?php endif; ?>
 </body>
 </html>
