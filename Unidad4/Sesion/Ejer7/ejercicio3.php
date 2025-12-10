@@ -44,7 +44,7 @@
         $fecha = date("Y-m-d", strtotime($inscripcion));
 
         $stmt = $conn->prepare($sqlMatricula); 
-        $stmt->bind_param("siiiss", $dni, $codCurso, $pruebaA, $pruebaB, $tipo, $fecha);
+        $stmt->bind_param("ssssss", $dni, $codCurso, $pruebaA, $pruebaB, $tipo, $fecha);
         $stmt->execute();
 
         if($stmt->affected_rows > 0){
