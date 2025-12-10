@@ -4,9 +4,8 @@
     if(isset($_POST["boton"])){
         $_SESSION["nombre"] = $_POST["nombre"] ?? '';
         $_SESSION["passwd"] = $_POST["passwd"] ?? '';
-
+        
         header("Location: confirmacion.php");
-        exit;
     }
 ?>
 

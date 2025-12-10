@@ -13,7 +13,7 @@
         header("Location: inicio.php");
         exit;
     }
-
+''
 ?>
 
 <!DOCTYPE html>

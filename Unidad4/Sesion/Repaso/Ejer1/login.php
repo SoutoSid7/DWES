@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>Bienvenido a nuestra pagina</h1>
 </body>
 </html>
