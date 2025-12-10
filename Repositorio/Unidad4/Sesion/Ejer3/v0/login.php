@@ -42,7 +42,7 @@
                 $user = $result->fetch_assoc(); // Convierte la primera fila en un array asociativo 
                 if($clave == $user['Clave']){ // Comprueba la contraseña introducida con la contraseña de la BBDD
                     $_SESSION['loggedin'] = true; // Marca usuario esta auntetificado en la sesion
-                    $_SESSION['id'] = $user['id']; // Guarda el id del usuario en la sesion 
+                    $_SESSION['id'] = $user['Codigo']; // Guarda el id del usuario en la sesion 
                     $_SESSION['Nombre'] = $user['Nombre'];
                     header("Location: inicio.php");
                     exit();
