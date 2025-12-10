@@ -55,7 +55,6 @@
 </head>
 <body>
     <h3>Bienvenido, <?php echo $nombre; ?> </h3>
-    <!-- TABLA DE PRODUCTOS -->
     <table border="1">
         <tr>
             <th>Producto</th>
@@ -64,12 +63,17 @@
             <th></th>
         </tr>
 
-        <?php foreach ($productos as $id => $p): ?>
+        <?php foreach ($productos as $id => $p): ?> <!-- Recorre el array productos 
+            $id clave del producto
+            $p nombre, producto, precio
+            -->
         <tr>
+        <!-- Cada iteracion una fila con los datos -->
             <td><?= $p["nombre"] ?></td>
             <td><?= $p["descripcion"] ?></td>
             <td><?= $p["precio"] ?>€</td>
             <td>
+            <!-- Envia POST y añade el producto -->
                 <form method="POST">
                     <button type="submit" name="add" value="<?= $id ?>">Añadir al carrito</button>
                 </form>
@@ -79,7 +83,7 @@
     </table>
 
     <h3>Carrito</h3>
-
+    <!-- Verifica si el array carrito esta vacio -->
     <?php if (empty($_SESSION["carrito"])): ?>
         <p>El carrito está vacío.</p>
     <?php else: ?>
@@ -91,6 +95,10 @@
             <th>Quitar</th>
         </tr>
 
+        <!-- Recorrer productos del carrito
+            $id identificador del producto(monitor)
+            $cantidad numero de unidades
+        -->
         <?php foreach ($_SESSION["carrito"] as $id => $cantidad): ?>
         <tr>
             <td><?= $productos[$id]["nombre"] ?></td>
