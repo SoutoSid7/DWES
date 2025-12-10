@@ -9,12 +9,16 @@
     <h1>Iniciar sesión</h1>
     <form action="login.php" method="post">
         <label for="usuario">Usuario:</label>
-        <input id="usuario" name="usuario" type="text" placeholder="Introduce tu usuario">
+        <input id="usuario" name="usuario" type="text" placeholder="Introduce tu usuario"><br>
 
         <br><label for="passwd">Contraseña:</label>
         <input id="passwd" name="passwd" type="password" placeholder="Introduce tu contraseña">
 
         <br><br><button type="submit" name="login">Enviar</button>
+    </form>
+
+    <form action="nuevoUsuario.php" method="post">
+        <br><button type="submit" name="login">Crear Nuevo Usuario</button>
     </form>
 
 <!--PHP-->
@@ -44,7 +48,7 @@
                     $_SESSION['loggedin'] = true; // Marca usuario esta auntetificado en la sesion
                     $_SESSION['id'] = $user['Codigo']; // Guarda el id del usuario en la sesion 
                     $_SESSION['Nombre'] = $user['Nombre'];
-                    header("Location: inicio.php");
+                    header("Location: dificultad.php");
                     exit();
                 }
             } else {
