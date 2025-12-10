@@ -1,7 +1,8 @@
 <?php
-    session_start()
+    session_start(); 
     if(isset($_POST["boton"])){
-
+        $_SESSION["nombre"] = $_POST["nombre"] ?? '';
+        header("Location: producto.php");
     }
 ?>
 
