@@ -14,7 +14,11 @@
         if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
 
         // Buscar Alumno
-        $sql = "SELECT * FROM alumno WHERE dniA = ?;";
+        $sql = "
+                SELECT * 
+                FROM alumno 
+                WHERE dniA = ?;
+                ";
         $stmt = $conn->prepare($sql);
         if($stmt){
             $stmt-> bind_param("s", $dni);

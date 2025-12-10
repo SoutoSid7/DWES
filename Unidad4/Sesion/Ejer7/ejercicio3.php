@@ -1,16 +1,14 @@
 <?php
     session_start();
-    echo "<br>ALUMNO:    " .$_SESSION["dni"] ." NOMBRE:  " .$_SESSION["nombre"];
-
-    $codCurso = $_POST["codCurso"] ?? '';
-    $pruebaA = $_POST["pruebaA"] ?? '';
-    $pruebaB = $_POST["pruebaB"] ?? '';
-    $tipo = $_POST["tipo"] ?? '';
-    $inscripcion = $_POST["inscripcion"] ?? '';
+    echo "<br>ALUMNO:    " .$_SESSION["dni"] ." NOMBRE:  " .$_SESSION["nombre"] ."<br>";
 
     if(isset($_POST["boton"])){
-
-        
+        $dni = $_SESSION["dni"] ?? '';
+        $codCurso = $_POST["codCurso"] ?? '';
+        $pruebaA = $_POST["pruebaA"] ?? '';
+        $pruebaB = $_POST["pruebaB"] ?? '';
+        $tipo = $_POST["tipo"] ?? '';
+        $inscripcion = $_POST["inscripcion"] ?? '';
 
         // Datos de Conexion
         $hn = 'localhost';
@@ -20,6 +18,40 @@
 
         $conn = new mysqli($hn, $un, $pw, $db);
         if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
+
+        $sqlCodCurso = "
+                        SELECT * 
+                        FROM curso
+                        WHERE codigocurso = ?;
+                        ";
+
+        $stmt = $conn->prepare($sqlCodCurso);
+        $stmt-> bind_param("i", $codCurso);
+        $stmt->execute();
+    
+        $resultado = $stmt->get_result();
+
+        if($resultado->num_rows == 0){
+            echo("El curso no existe");
+        }
+
+        $sqlMatricula = "
+                        INSERT INTO matricula (dnialumno, codcurso, pruebaA, pruebaB, tipo, inscripcion)
+                        VALUES (?, ?, ?, ?, ?, ?);
+                        ";
+
+        // Convertir Fecha
+        $fecha = date("Y-m-d", strtotime($inscripcion));
+
+        $stmt = $conn->prepare($sqlMatricula); 
+        $stmt->bind_param("siiiss", $dni, $codCurso, $pruebaA, $pruebaB, $tipo, $fecha);
+        $stmt->execute();
+
+        if($stmt->affected_rows > 0){
+            echo "La matricula del alumno " .$dni ." en el curso " .$codCurso ." se ha realizado correctamente"; 
+        } else {
+            echo "Fatal ERROR";
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -41,7 +73,7 @@
 
         <br><br>
         <label for="codCurso">COD CURSO: </label>
-        <input type="text" id="codCurso" name="codCurso">  
+        <input type="number" id="codCurso" name="codCurso">  
 
         <br><br>
         <label for="pruebaA">PRUEBA A: </label>
