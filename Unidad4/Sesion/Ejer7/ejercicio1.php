@@ -37,7 +37,11 @@
         }
 
         // Buscar Profesor
-        $sql = "SELECT * FROM profesor WHERE dniP = ?;";
+        $sql = "
+                SELECT * 
+                FROM profesor 
+                WHERE dniP = ?;
+                ";
         $stmt = $conn->prepare($sql);
         if($stmt){
             $stmt-> bind_param("s", $dni);
