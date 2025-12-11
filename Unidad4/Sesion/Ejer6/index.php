@@ -26,7 +26,6 @@
         } else {
             echo "Credenciales Incorrectas. Intentelo de nuevo";
         }
-
     }
 ?>
 <!DOCTYPE html>
