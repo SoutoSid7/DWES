@@ -12,8 +12,8 @@
         $_SESSION["contador"]++;
     }
 
-    // Combinacion Aleatoria
-    if(!isset($_SESSION["cartas"])){
+    // Combinacion Aleatoria        
+    if(!isset($_SESSION["conjunto"])){
         $cartas = ["copas_02.jpg","copas_03.jpg", "copas_05.jpg"];
         $conjunto = array_merge($cartas, $cartas);
         shuffle($conjunto);
@@ -29,7 +29,7 @@
     <title>Mostrar Cartas</title>
 </head>
 <body>
-    <h1>Bienvenido <?php echo $_SESSION["login"]; ?></h1>
+    <h1>Bienvenid@ <?php echo $_SESSION["login"]; ?></h1>
     <form action="mostrarcartas.php" method="POST">
         <label for="carL">Cartas Levantadas: </label>
         <span>
@@ -44,7 +44,7 @@
             }
         ?>
     </form>
-    
+
     <h2>Pareja:</h2>
     <form action="resultado.php" method="POST">
         <input type="number" name="n1" max="6" required>
