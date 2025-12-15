@@ -1,11 +1,27 @@
 <?php
     session_start();
-    $imagenes = ["copas_02", "copas_03", "copas_05"];  
-    $count = 0; 
-    if(isset($_POST["btnCarta1"])){
-        $count ++;
-        
+
+    // Contador Cartas Levantadas
+    if(!isset($_SESSION["contador"])){
+        $_SESSION["contador"] = 0;
     }
+
+    // Guardar Carta Lenvantada
+    if(isset($_POST["carta"])){
+        $_SESSION["levantada"] = $_POST["carta"];
+        $_SESSION["contador"]++;
+    }
+
+    // Combinacion Aleatoria
+    if(!isset($_SESSION["cartas"])){
+        $cartas = [
+            "copas_02.jpg","copas_03.jpg", "copas_05.jpg"
+        ];
+        $conjunto = array_merge($cartas, $cartas);
+        shuffle($conjunto);
+        $_SESSION["conjunto"] = $conjunto;
+    }
+    $mostrarCartas = $_SESSION["conjunto"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,51 +36,34 @@
         <label for="carL">Cartas Levantadas: </label>
         <span>
             <?php
-                echo $count;
+                echo $_SESSION["contador"];
             ?>
         </span>
 
         <br><br>
-        <input type="submit" name="btnCarta1" value="Levantar carta 1">
-        <input type="button" name="btnCarta2" value="Levantar carta 2">
-        <input type="button" name="btnCarta3" value="Levantar carta 3">
-        <input type="button" name="btnCarta4" value="Levantar carta 4">
-        <input type="button" name="btnCarta5" value="Levantar carta 5"> 
-        <input type="button" name="btnCarta6" value="Levantar carta 6">
+        <?php
+            // Boton interactivo
+            for($i = 0; $i < 6; $i++){
+                echo "<button type='submit' name='carta' value='$i'>Levantar Carta " .($i+1)."</button>";
+            }
+        ?>
     </form>
     <h2>Pareja:</h2>
     <form action="resultado.php" method="POST">
+        <input type="number" name="n1" max="6" required>
+        <input type="number" name="n2" max="6" required>
         <input type="submit" name="resultado" value="Comprobar">            
     </form><br>
+
     <?php
-        $mostrarCartas = [];
-        for ($i = 0; $i <= 5; $i++){
-            $pos = rand(0, 5);   
-            $mostrarCartas[$i] = $pos;
-        }
-       foreach ($mostrarCartas as $i => $bin){
-            switch($pos){
-                case 0:
-                    $img = ($bin == $i) ? "copas_02.jpg" : "boca_abajo.JPG";
-                    break;
-                case 1:
-                    $img = ($bin == $i) ? "copas_03.jpg" : "boca_abajo.JPG";
-                    break;
-                case 2:
-                    $img = ($bin == $i) ? "copas_05.jpg" : "boca_abajo.JPG";
-                    break;
-                case 3:
-                    $img = ($bin == $i) ? "copas_02.jpg" : "boca_abajo.JPG";
-                    break; 
-                case 4:
-                    $img = ($bin == $i) ? "copas_03.jpg" : "boca_abajo.JPG";
-                    break;
-                case 5:
-                    $img = ($bin == $i) ? "copas_05.jpg" : "boca_abajo.JPG";
-                    break;
+        for($i = 0; $i < 6; $i++){
+            $img = "boca_abajo.jpg";
+
+            if(isset($_SESSION["levantada"]) && $_SESSION["levantada"] == $i){
+                $img = $mostrarCartas[$i];
             }
-            echo "<img src='$img' width='80' height='100'> ";
-        }   
+            echo "<img src='$img' width='80' height='100'> "; 
+        }
     ?>
 </body>
 </html>
