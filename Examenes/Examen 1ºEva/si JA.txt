@@ -1,0 +1,7 @@
+Crear una variable llamada ARRIBA que cuente el numero de cartas levantadas.
+
+El código ha de contener una variable llamada juego-cartas-copas.
+
+La combinación se ha de guardar en la variable COMB-ALEATORIA.
+
+Haz las consultas de SQL sin parametrizar.
