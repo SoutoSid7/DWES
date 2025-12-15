@@ -14,9 +14,7 @@
 
     // Combinacion Aleatoria
     if(!isset($_SESSION["cartas"])){
-        $cartas = [
-            "copas_02.jpg","copas_03.jpg", "copas_05.jpg"
-        ];
+        $cartas = ["copas_02.jpg","copas_03.jpg", "copas_05.jpg"];
         $conjunto = array_merge($cartas, $cartas);
         shuffle($conjunto);
         $_SESSION["conjunto"] = $conjunto;
@@ -35,9 +33,7 @@
     <form action="mostrarcartas.php" method="POST">
         <label for="carL">Cartas Levantadas: </label>
         <span>
-            <?php
-                echo $_SESSION["contador"];
-            ?>
+            <?php echo $_SESSION["contador"]; ?>
         </span>
 
         <br><br>
