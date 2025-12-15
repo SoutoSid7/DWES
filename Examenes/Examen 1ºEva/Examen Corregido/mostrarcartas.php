@@ -44,6 +44,7 @@
             }
         ?>
     </form>
+    
     <h2>Pareja:</h2>
     <form action="resultado.php" method="POST">
         <input type="number" name="n1" max="6" required>
