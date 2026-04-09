@@ -10,7 +10,7 @@
     // (C)
     $confirmado = array(true, true, false, true, false, false);
     echo $confirmado[0]? 'true' : 'false<br>';
-   /* 
+    /* 
         if ($confirmado = 1){
             echo "true";
         } else {
