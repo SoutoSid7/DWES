@@ -1,3 +1,4 @@
+
 <?php
     $academia = array(
         array(1, 6, 3),
