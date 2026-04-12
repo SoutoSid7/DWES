@@ -1,4 +1,8 @@
 <?php
+    /*
+        Dados 3 números asignados dentro del código a mostrar el número mayor de los tres.
+    */
+    
     $num1 = 1;
     $num2 = 7;
     $num3 = 9;

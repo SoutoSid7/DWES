@@ -1,4 +1,8 @@
 <?php
+    /*
+        Identificar entre dos números aleatorios cual es el mayor y si este es par o impar.
+    */
+    
     $num1 = random_int(1,10);
     $num2 = random_int(1,10);
 
