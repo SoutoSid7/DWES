@@ -1,6 +1,6 @@
 <?php
 // Formulario 1
-    if(isset($_POST['name']))
+    if(isset($_POST['name']));
     else echo $_POST['name'];
     echo <<<_END
         <html>
