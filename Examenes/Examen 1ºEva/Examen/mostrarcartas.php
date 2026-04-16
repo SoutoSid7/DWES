@@ -35,14 +35,15 @@
     <h2>Pareja:</h2>
     <form action="resultado.php" method="POST">
         <input type="submit" name="resultado" value="Comprobar">            
-    </form><br>
+    </form>
+    <br><br>
     <?php
         $mostrarCartas = [];
         for ($i = 0; $i <= 5; $i++){
             $pos = rand(0, 5);   
             $mostrarCartas[$i] = $pos;
         }
-       foreach ($mostrarCartas as $i => $bin){
+        foreach ($mostrarCartas as $i => $bin){
             switch($pos){
                 case 0:
                     $img = ($bin == $i) ? "copas_02.jpg" : "boca_abajo.JPG";
