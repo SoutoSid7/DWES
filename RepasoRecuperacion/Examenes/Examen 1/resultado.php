@@ -36,7 +36,7 @@
             $sql = "
                 UPDATE jugador
                 SET puntos = puntos - 1,
-                    extra = extra - ?
+                    extra = extra + ?
                 WHERE login = ?;
             ";
             
@@ -76,8 +76,14 @@
 <body>
     <h1>Bienvenid@ <?php echo $_SESSION['login'] ?></h1>
 
-    <h2><?php echo $acierto; ?></h2>
-    <h2><?php echo $fallo; ?></h2>
+    <h2><?php if(isset($acierto)){
+            echo $acierto;
+        }?>
+    </h2>
+    <h2><?php if(isset($fallo)){
+            echo $fallo;
+        }?>
+    </h2>
     
     <h2>Puntos por jugador</h2>
     <table border="1">
