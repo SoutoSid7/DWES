@@ -40,11 +40,13 @@
         </span>
 
         <br><br>
+        <!-- Boton Dinamico -->
         <?php for($i = 1; $i <= $totalCartas; $i++):?> <!-- : -> Abre el bloque del for cuando mezclas PHP con HTML -->
             <button type="submit" name="levantar" value="<?php echo $i; ?>"> <!-- Pone como valor del botón el número actual de $i -->
                 Levantar Carta <?php echo $i; ?>
             </button>
         <?php endfor; 
+        // Guardar numero pulsado del boton
             $cartaLevantada = isset($_POST["levantar"]) ? (int)$_POST["levantar"] : 0; 
             /*
             *   Si sí existe, hace esto: 
@@ -67,6 +69,7 @@
     <br>
     <?php
         for($i=1; $i<=$totalCartas; $i++){
+            // Cuando se pulsa el boton ej: num2, muestra la imagen num 2-1 del array
             if($cartaLevantada == $i){
                 echo "<img src='" . $img[$i - 1] . ".jpg' alt='Carta' width='80' height='100'>";
             } else {
