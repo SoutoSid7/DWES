@@ -1,6 +1,14 @@
 <?php
     session_start();
-    $imagenes = ["copas_02", "copas_03", "copas_05"];
+    $aleatorio1 = ["img/copas_02", "img/copas_03", "img/copas_05"];
+    $aleatorio2 = ["img/copas_02", "img/copas_03", "img/copas_05"];
+
+    if (!isset($_SESSION["cartas"])) { // Si no existe la sesion cartas
+        $img = array_merge($aleatorio1, $aleatorio2); // Junta arrays
+        shuffle($img); // Mezcla arrays
+        $_SESSION["cartas"] = $img; // Guarda ese array en la sesión
+    }
+    $img = $_SESSION["cartas"]; // Recupera el tablero guardado
 
     $totalCartas = 6; // num cartas para el boton dinamico
 
@@ -11,7 +19,6 @@
     if(isset($_POST["levantar"])){
         $_SESSION["cont"]++;
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -37,23 +44,36 @@
             <button type="submit" name="levantar" value="<?php echo $i; ?>"> <!-- Pone como valor del botón el número actual de $i -->
                 Levantar Carta <?php echo $i; ?>
             </button>
-        <?php endfor; ?>
+        <?php endfor; 
+            $cartaLevantada = isset($_POST["levantar"]) ? (int)$_POST["levantar"] : 0; 
+            /*
+            *   Si sí existe, hace esto: 
+            *   Coge el valor (por ejemplo "4")
+            *   Lo convierte a número entero con (int)
+            *   Lo guarda en $cartaLevantada
+            *   Si no es 0
+            */
+        ?>
     </form>
 
     <form action="resultado.php" method="POST">
         <br><br>
         <label>Pareja:</label>
-        <input type="text" name="n1" min="1" max="6">
-        <input type="text" name="n2" min="1" max="6">
-        <input type="submit" name="resultado" value="Comprobar">         
+        <input type="number" name="n1" max="6" required>
+        <input type="number" name="n2" max="6" required>
+        <input type="submit" name="resultado" value="Comprobar">     
+        
     </form>
-
+    <br>
     <?php
-        for($i=0; $i<=6; $i++){
-            echo "<img src='boca_abajo.jpg' width='80' height='100'>";
+        for($i=1; $i<=$totalCartas; $i++){
+            if($cartaLevantada == $i){
+                echo "<img src='" . $img[$i - 1] . ".jpg' alt='Carta' width='80' height='100'>";
+            } else {
+                echo "<img src='img/boca_abajo.jpg' width='80' height='100'> ";
+            }
         }
     ?>
-
 </body>
 </html>
 
