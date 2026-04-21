@@ -4,7 +4,7 @@
     if(isset($_POST["guardar"])){
         $dni = $_SESSION["dni"] ?? '';        
         $codCurso = $_POST["codCurso"] ?? '';
-        $pruebaA = $_POST["pruebaA"] ?? '';
+        $pruebaA = $_POST["pruebaA"] ?? ''; // Para guardarlo en sesion $_SESSION["pruebaA"] = $pruebaA
         $pruebaB = $_POST["pruebaB"] ?? '';
         $tipo = $_POST["tipo"] ?? '';
         $inscripcion = $_POST["inscripcion"] ?? '';
