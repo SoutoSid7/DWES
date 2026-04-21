@@ -16,9 +16,9 @@
             FROM solucion
             WHERE fecha = CURDATE();
         ";
-    $stmt = $conn->prepare($sql); 
-    $stmt->execute();
-    $resultado = $stmt->get_result();
+    $stmt1 = $conn->prepare($sql); 
+    $stmt1->execute();
+    $resultado = $stmt1->get_result();
 
     // Si existe una fila en el resultado, guárdala en $fila y usa su campo solucion
     if($fila = $resultado->fetch_assoc()){
@@ -32,10 +32,11 @@
             WHERE fecha = CURDATE()
                 AND respuesta = ?;
         ";
-    $stmt = $conn->prepare($sql2); 
-    $stmt->bind_param("s", $solHoy); // Consulta parametrizada
-    $stmt->execute();
-    $resultado2 = $stmt->get_result();
+    $stmt2 = $conn->prepare($sql2); 
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->bind_param("s", $solHoy); // Consulta parametrizada
+    $stmt2->execute();
+    $resultado2 = $stmt2->get_result();
 
     $data = [];
     $aciertos = 0;
@@ -59,12 +60,11 @@
                 LIMIT 1
             );
         ";
-    $stmt = $conn->prepare($sqlFallos); 
-    $stmt->execute();
-    $resultadoFallos = $stmt->get_result();
+    $stmt4 = $conn->prepare($sqlFallos); 
+    $stmt4->execute();
+    $resultadoFallos = $stmt4->get_result();
 
     $dataFallos = [];
-
     if($resultadoFallos && $resultadoFallos-> num_rows > 0){
         while($row = $resultadoFallos->fetch_assoc()){
             $dataFallos[] = $row;

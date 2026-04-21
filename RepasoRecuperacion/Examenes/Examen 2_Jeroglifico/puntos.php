@@ -48,14 +48,14 @@
             <td><?= $row['puntos'] ?></td>
             <td>
                 <?php 
-                    $max = 200;
+                    $max = 10;
                     $porcentaje = ($row['puntos'] / $max) * 100;
                 ?>
                 <div style="width:300px; border:1px solid #555;">
                     <div style="
                         width: <?php echo $porcentaje; ?>%;
                         height: 30px;
-                        background: #72c5eb;">
+                        background: #72c5eb;"> 
                     </div>
                 </div>
             </td>
