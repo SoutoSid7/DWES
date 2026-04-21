@@ -25,7 +25,6 @@
             $data[] = $row; // Guarda el valor de row en el array data
         }
     }
-
 ?>
 
 <!DOCTYPE html>
