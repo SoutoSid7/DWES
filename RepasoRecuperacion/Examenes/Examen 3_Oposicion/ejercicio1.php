@@ -61,7 +61,7 @@
     <title>Inicio</title>
 </head>
 <body>
-    <form action="" method="post" >
+    <form action="ejercicio1.php" method="post" >
         <label for="dni">DNI:</label>
         <input type="text" id="dni" name="dni">
 
