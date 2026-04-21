@@ -10,7 +10,7 @@
     $conn = new mysqli($hn, $un, $pw, $db);
     if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
 
-    // Comprobar Si Respuesta Es = A Respuesta BBDD
+// Comprobar Si Respuesta Es = A Respuesta BBDD
     $sql = "
             SELECT solucion
             FROM solucion
@@ -25,7 +25,7 @@
         $solHoy = $fila['solucion'];
     }
 
-    // Mostrar Jugadores Acertados Hoy
+// Mostrar Jugadores Acertados Hoy
     $sql2 = "
             SELECT login, hora
             FROM respuestas 
@@ -33,7 +33,7 @@
                 AND respuesta = ?;
         ";
     $stmt = $conn->prepare($sql2); 
-    $stmt->bind_param("s", $solHoy);
+    $stmt->bind_param("s", $solHoy); // Consulta parametrizada
     $stmt->execute();
     $resultado2 = $stmt->get_result();
 
@@ -46,7 +46,7 @@
         }
     }
 
-    // Mostrar Jugadores Fallados Hoy
+// Mostrar Jugadores Fallados Hoy
     $sqlFallos = "
     /* Dame todos los usuarios que han respondido hoy y cuya respuesta NO es igual a la solución de hoy */
             SELECT login, hora, respuesta
