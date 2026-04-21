@@ -10,25 +10,66 @@
     $conn = new mysqli($hn, $un, $pw, $db);
     if ($conn->connect_error) die("Error de conexión: " . $conn->connect_error);
 
-    // Mostrar Jugadores Acertados Hoy
+    // Comprobar Si Respuesta Es = A Respuesta BBDD
     $sql = "
-            SELECT login, hora
-            FROM respuestas 
+            SELECT solucion
+            FROM solucion
             WHERE fecha = CURDATE();
         ";
     $stmt = $conn->prepare($sql); 
     $stmt->execute();
     $resultado = $stmt->get_result();
 
+    // Si existe una fila en el resultado, guárdala en $fila y usa su campo solucion
+    if($fila = $resultado->fetch_assoc()){
+        $solHoy = $fila['solucion'];
+    }
+
+    // Mostrar Jugadores Acertados Hoy
+    $sql2 = "
+            SELECT login, hora
+            FROM respuestas 
+            WHERE fecha = CURDATE()
+                AND respuesta = ?;
+        ";
+    $stmt = $conn->prepare($sql2); 
+    $stmt->bind_param("s", $solHoy);
+    $stmt->execute();
+    $resultado2 = $stmt->get_result();
+
     $data = [];
     $aciertos = 0;
-    if($resultado && $resultado-> num_rows > 0){
-        while($row = $resultado->fetch_assoc()){
+    if($resultado2 && $resultado2-> num_rows > 0){
+        while($row = $resultado2->fetch_assoc()){
             $data[] = $row;
             $aciertos ++;
         }
     }
 
+    // Mostrar Jugadores Fallados Hoy
+    $sqlFallos = "
+    /* Dame todos los usuarios que han respondido hoy y cuya respuesta NO es igual a la solución de hoy */
+            SELECT login, hora, respuesta
+            FROM respuestas
+            WHERE fecha = CURDATE()
+            AND respuesta <> ( /*la respuesta del usuario es distinta a la solución correcta*/
+                SELECT solucion
+                FROM solucion
+                WHERE fecha = CURDATE()
+                LIMIT 1
+            );
+        ";
+    $stmt = $conn->prepare($sqlFallos); 
+    $stmt->execute();
+    $resultadoFallos = $stmt->get_result();
+
+    $dataFallos = [];
+
+    if($resultadoFallos && $resultadoFallos-> num_rows > 0){
+        while($row = $resultadoFallos->fetch_assoc()){
+            $dataFallos[] = $row;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +89,20 @@
             <th>Hora</th>
         </tr>
         <?php foreach ($data as $row): ?>
+        <tr>
+            <td><?= $row['login'] ?></td>
+            <td><?= $row['hora'] ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+
+    <h2>Jugadores Que Han Fallado</h2>
+    <table border="1">
+        <tr>
+            <th>Login</th>
+            <th>Hora</th>
+        </tr>
+        <?php foreach ($dataFallos as $row): ?>
         <tr>
             <td><?= $row['login'] ?></td>
             <td><?= $row['hora'] ?></td>
