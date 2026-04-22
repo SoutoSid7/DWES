@@ -37,8 +37,11 @@
             if($row['rol'] == "alumno"){
                 header("Location:resultado_alumno.php");
                 exit;
-            } else {
+            } elseif($row['rol'] == "directora") {
                 header("Location:resultado_directora.php");
+                exit;
+            } else {
+                echo "Rol no permitido";
             }
         } else {
             echo "Error en usuario y/o contraseña";
