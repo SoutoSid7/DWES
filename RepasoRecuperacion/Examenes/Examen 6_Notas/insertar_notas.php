@@ -25,11 +25,51 @@
                 FROM usuarios
                 WHERE id = ?;
             ";
-            
-        }
+            $stmtUser = $conn->prepare($sqlUser); 
+            $stmtUser->bind_param("i", $id);
+            $stmtUser->execute();
+            $resultadoUser = $stmtUser->get_result();
 
+            // Comprobar SI exsite en alumnos
+            $sqlAlum = "
+            SELECT * 
+            FROM alumnos
+            WHERE id = ?;
+            ";
+            $stmtAlum = $conn->prepare($sqlAlum); 
+            $stmtAlum->bind_param("i", $id);
+            $stmtAlum->execute();
+            $resultadoAlum = $stmtAlum->get_result();
+
+            // Mensajes de error
+            if($resultadoUser-> num_rows == 0 && $resultadoAlum-> num_rows == 0){
+                echo "El alumno NO existe en la tabla alumnos y tampoco en usuarios";
+            } elseif($resultadoAlum-> num_rows == 0){
+                echo "El alumno NO existe en la tabla alumnos";
+            } elseif($resultadoUser-> num_rows == 0){
+                echo "El alumno NO existe en la tabla usuarios";
+            } else { // SI todo OK INSERT
+                $sqlNota = "
+                    INSERT INTO notas(alumno, asignatura, fecha, nota) 
+                    VALUES (?, ?, CURDATE(),?);
+                ";
+
+                $stmtNota = $conn->prepare($sqlNota); 
+                $stmtNota->bind_param("isi", $id, $asig, $nota);
+                $stmtNota->execute();
+
+                if($stmtNota-> affected_rows == 1){
+                    echo "Nota insertada correctamente";
+                }
+
+            }    
+        }
     }
 
+    if(isset($_POST["volver"])){
+        header("Location: resultado_directora.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +93,7 @@
 
         <br><br>
         <button type="submit" name="insertar">Insertar Nota</button>
+        <button type="submit" name="volver">Volver</button>
     </form>
 </body>
 </html>

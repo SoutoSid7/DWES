@@ -31,6 +31,8 @@
         if($resultado -> num_rows == 1){
             $row = $resultado->fetch_assoc(); // Asocia a row un array con los datos encontrados
             $_SESSION["nombre"] = $row['nombre'] ?? '';
+            $_SESSION["id"] = $row["id"] ?? '';
+            $_SESSION["rol"] = $row["rol"] ?? '';
 
             if($row['rol'] == "alumno"){
                 header("Location:resultado_alumno.php");

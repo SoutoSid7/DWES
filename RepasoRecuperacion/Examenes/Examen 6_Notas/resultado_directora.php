@@ -30,7 +30,7 @@
 </head>
 <body>
     <h1>Bienvenido</h1>
-    <h3>Tu perfil es de director/a </h3>
+    <h3>Tu perfil es de <?php echo $_SESSION["rol"];?> </h3>
 
     <form method="post">
             <button type="submit" name="insertarNota">Insertar Nota</button>
